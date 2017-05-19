@@ -15,7 +15,7 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Download CentOS 7 box
+## Download Ubuntu Xenial box
 ```
 $ vagrant init ubuntu/xenial64
 ```
