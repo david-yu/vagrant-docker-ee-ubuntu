@@ -1,4 +1,4 @@
-Vagrant Virtualbox setup for Docker EE Engine on CentOS 7.3
+Vagrant Virtualbox setup for Docker EE Engine on Ubuntu Xenial 16.04
 ========================
 
 An exercise on installing Docker EE Engine and properly configuring Device Mapper on CentOS, which may be helpful for walking through the install and configuration of Docker EE Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes.
@@ -17,7 +17,7 @@ https://www.virtualbox.org/wiki/Downloads
 
 ## Download CentOS 7 box
 ```
-$ vagrant init centos/7
+$ vagrant init ubuntu/xenial64
 ```
 
 ## Create files in project to store environment variables with custom values for use by Vagrant
