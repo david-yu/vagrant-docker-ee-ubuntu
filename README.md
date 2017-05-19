@@ -20,11 +20,6 @@ https://www.virtualbox.org/wiki/Downloads
 $ vagrant init centos/7
 ```
 
-## Make disk directories to store vdi files that are created for VMs in the cluster
-```
-$ mkdir ../vagrant-disks
-```
-
 ## Create files in project to store environment variables with custom values for use by Vagrant
 ```
 ee_url
