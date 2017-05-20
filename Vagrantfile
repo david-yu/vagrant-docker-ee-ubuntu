@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
       config.vm.provider :virtualbox do |vb|
          vb.customize ["modifyvm", :id, "--memory", "1024"]
          vb.customize ["modifyvm", :id, "--cpus", "1"]
-         vb.name = "haproxy-node"
+         vb.name = "ubuntu-haproxy-node"
       end
       haproxy_node.landrush.enabled = true
       haproxy_node.landrush.tld = 'local'
@@ -58,9 +58,8 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node1"
       end
       ubuntu_ucp_node1.vm.provision "shell", inline: <<-SHELL
-        sudo yum -y remove docker
-        sudo yum -y remove docker-selinux
-        sudo yum -y install ntpdate net-tools
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo chmod +x install_ee.sh
@@ -83,9 +82,8 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node2"
       end
       ubuntu_ucp_node2.vm.provision "shell", inline: <<-SHELL
-        sudo yum -y remove docker
-        sudo yum -y remove docker-selinux
-        sudo yum -y install ntpdate net-tools
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo chmod +x install_ee.sh
@@ -106,13 +104,12 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node3"
       end
       ubuntu_ucp_node3.vm.provision "shell", inline: <<-SHELL
-       sudo yum -y remove docker
-       sudo yum -y remove docker-selinux
-       sudo yum -y install ntpdate net-tools
-       sudo ntpdate -s time.nist.gov
-       sudo cp /vagrant/scripts/install_ee.sh .
-       sudo chmod +x install_ee.sh
-       ./install_ee.sh
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo ntpdate -s time.nist.gov
+        sudo cp /vagrant/scripts/install_ee.sh .
+        sudo chmod +x install_ee.sh
+        ./install_ee.sh
      SHELL
     end
 
@@ -129,14 +126,13 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-dtr-node1"
       end
       ubuntu_dtr_node1.vm.provision "shell", inline: <<-SHELL
-       sudo yum -y remove docker
-       sudo yum -y remove docker-selinux
-       sudo yum -y install ntpdate net-tools
-       sudo ntpdate -s time.nist.gov
-       sudo cp /vagrant/scripts/install_ee.sh .
-       sudo chmod +x install_ee.sh
-       ./install_ee.sh
-       sudo hostname -I | awk '{print $2}' > /vagrant/ubuntu-dtr-node1
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo ntpdate -s time.nist.gov
+        sudo cp /vagrant/scripts/install_ee.sh .
+        sudo chmod +x install_ee.sh
+        ./install_ee.sh
+        sudo hostname -I | awk '{print $2}' > /vagrant/ubuntu-dtr-node1
      SHELL
     end
 
@@ -153,13 +149,12 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-worker-node1"
       end
       ubuntu_worker_node1.vm.provision "shell", inline: <<-SHELL
-       sudo yum -y remove docker
-       sudo yum -y remove docker-selinux
-       sudo yum -y install ntpdate net-tools
-       sudo ntpdate -s time.nist.gov
-       sudo cp /vagrant/scripts/install_ee.sh .
-       sudo chmod +x install_ee.sh
-       ./install_ee.sh
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo ntpdate -s time.nist.gov
+        sudo cp /vagrant/scripts/install_ee.sh .
+        sudo chmod +x install_ee.sh
+        ./install_ee.sh
      SHELL
     end
 
