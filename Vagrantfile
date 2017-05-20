@@ -64,8 +64,9 @@ Vagrant.configure(2) do |config|
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo chmod +x install_ee.sh
-        sudo hostname -I | awk '{print $2}' > /vagrant/ubuntu-ucp-node1
-        # ./install_ee.sh
+        ./install_ee.sh
+        sudo chmod +x install_ucp.sh
+        ./install_ucp.sh
      SHELL
     end
 
