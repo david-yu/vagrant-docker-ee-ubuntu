@@ -64,6 +64,7 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo chmod +x install_ee.sh
         ./install_ee.sh
+        sudo cp /vagrant/scripts/install_ucp.sh .
         sudo chmod +x install_ucp.sh
         ./install_ucp.sh
      SHELL
