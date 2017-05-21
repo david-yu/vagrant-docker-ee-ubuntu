@@ -87,8 +87,11 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
+        sudo cp /vagrant/scripts/join_master.sh .
         sudo chmod +x install_ee.sh
+        sudo chmod +x join_master.sh
         ./install_ee.sh
+        ./join_master.sh
       SHELL
     end
 
@@ -109,8 +112,11 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
+        sudo cp /vagrant/scripts/join_master.sh .
         sudo chmod +x install_ee.sh
+        sudo chmod +x join_master.sh
         ./install_ee.sh
+        ./join_master.sh
      SHELL
     end
 
@@ -131,9 +137,14 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
+        sudo cp /vagrant/scripts/join_worker.sh .
+        sudo cp /vagrant/scripts/join_worker.sh .
         sudo chmod +x install_ee.sh
+        sudo chmod +x join_worker.sh
+        sudo chmod +x install_dtr.sh
         ./install_ee.sh
-        sudo hostname -I | awk '{print $2}' > /vagrant/ubuntu-dtr-node1
+        ./join_worker.sh
+        ./install_dtr.sh
      SHELL
     end
 

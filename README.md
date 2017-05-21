@@ -23,6 +23,7 @@ $ vagrant init ubuntu/xenial64
 ## Create files in project to store environment variables with custom values for use by Vagrant
 ```
 ee_url
+ucp_password
 ```
 
 ## Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
