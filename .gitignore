@@ -3,6 +3,9 @@
 *.log
 ee_url
 ucp_password
+ucp-node1-ipaddr
 haproxy-node
+swarm-join-token-*
 *.lic
 *.pem
+*.tar
