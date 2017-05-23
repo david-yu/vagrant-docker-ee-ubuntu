@@ -4,6 +4,7 @@
 ee_url
 ucp_password
 ucp-node1-ipaddr
+ucp-id
 haproxy-node
 swarm-join-token-*
 *.lic
