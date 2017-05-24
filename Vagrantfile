@@ -90,11 +90,11 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
-        sudo cp /vagrant/scripts/join_master.sh .
+        sudo cp /vagrant/scripts/join_manager.sh .
         sudo chmod +x install_ee.sh
-        sudo chmod +x join_master.sh
+        sudo chmod +x join_manager.sh
         ./install_ee.sh
-        ./join_master.sh
+        ./join_manager.sh
       SHELL
     end
 
@@ -115,11 +115,11 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
-        sudo cp /vagrant/scripts/join_master.sh .
+        sudo cp /vagrant/scripts/join_manager.sh .
         sudo chmod +x install_ee.sh
-        sudo chmod +x join_master.sh
+        sudo chmod +x join_manager.sh
         ./install_ee.sh
-        ./join_master.sh
+        ./join_manager.sh
      SHELL
     end
 
