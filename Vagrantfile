@@ -66,6 +66,7 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/create_tokens.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x install_ucp.sh
+        sudo chmod +x create_tokens.sh
         ./install_ee.sh
         ./install_ucp.sh
         ./create_tokens.sh
