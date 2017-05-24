@@ -2,6 +2,7 @@
 *.vdi
 *.log
 ee_url
+dtr-replica-id
 ucp_password
 ucp-node1-ipaddr
 ucp-id
