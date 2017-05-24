@@ -15,6 +15,7 @@ sudo systemctl daemon-reload
 sudo systemctl start docker
 
 # Additional step for dnsmasq on localhost
+sudo apt-get -y install dnsmasq
 sudo sh -c "echo 'interface=vboxnet1
 listen-address=172.17.0.1' >> /etc/dnsmasq.d/docker-bridge.conf"
-sudo systemctl start dnsmasq
+sudo service dnsmasq restart

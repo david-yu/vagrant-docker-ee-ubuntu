@@ -26,6 +26,11 @@ ee_url
 ucp_password
 ```
 
+## Provide Docker EE license in project folder
+```
+docker_subscription.lic
+```
+
 ## Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
 ```
 
