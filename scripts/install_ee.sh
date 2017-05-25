@@ -5,7 +5,6 @@ sudo add-apt-repository "deb [arch=amd64] ${DOCKER_EE_URL} $(lsb_release -cs) st
 sudo apt-get update
 sudo apt-get -y install docker-ee
 sudo usermod -aG docker ubuntu
-ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/ucp-node1-ipaddr
 
 # Configure dns for Docker
 sudo sh -c "echo '{

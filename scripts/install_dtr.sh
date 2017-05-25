@@ -1,4 +1,5 @@
 < /dev/urandom tr -dc a-f0-9 | head -c${1:-12} > /vagrant/dtr-replica-id
+ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/dtr-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)

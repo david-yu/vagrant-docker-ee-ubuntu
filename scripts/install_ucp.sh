@@ -1,3 +1,4 @@
+ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/ucp-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:2.1.4 install --host-address ${UCP_IPADDR} --admin-password ${UCP_PASSWORD} --san ucp.local --license $(cat /vagrant/docker_subscription.lic)
