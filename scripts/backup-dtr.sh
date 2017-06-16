@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export UCP_IPADDR=$(cat /vagrant/ucp-vancouver-node1-ipaddr)
 export DTR_IPADDR=$(cat /vagrant/dtr-vancouver-node1-ipaddr)
