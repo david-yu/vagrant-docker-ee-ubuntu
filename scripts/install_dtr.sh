@@ -9,6 +9,9 @@ export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
 docker pull docker/dtr:2.2.5
 sudo -E sh -c 'curl -k https://${UCP_IPADDR}/ca > /home/ubuntu/ucp-ca.pem'
 
+# Sleep 35 seconds to wait for node registration
+sleep 35
+
 # Install DTR
 sudo -E sh -c 'docker run --rm docker/dtr:2.2.5 install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr-node1 --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username admin --ucp-password "${UCP_PASSWORD}" --ucp-ca "$(cat ucp-ca.pem)"'
 # Run backup of DTR
