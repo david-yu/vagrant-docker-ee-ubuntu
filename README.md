@@ -47,6 +47,11 @@ $ vagrant up haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1
 $ sudo killall -HUP mDNSResponder
 ```
 
+After running the `vagrant up` commands:
+- UCP will be accessible from `https:\\ucp.local`
+- DTR will be accessible from `https:\\dtr.local`
+
+
 ## Stop nodes
 
 ```
