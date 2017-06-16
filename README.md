@@ -1,7 +1,7 @@
 Vagrant Virtualbox setup for Docker EE Engine on Ubuntu Xenial 16.04
 ========================
 
-An exercise on installing Docker EE Engine and properly configuring Device Mapper on CentOS, which may be helpful for walking through the install and configuration of Docker EE Engine before actually doing so in production environments. This vagrant file is provided strictly for educational purposes.
+This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs HAProxy for loadbalancing, Docker EE, UCP, and DTR. This can be used as a demo environment on your local machine, when internet access is not present. 
 
 After running `vagrant up`:
 - UCP will be accessible from `https:\\ucp.local`
