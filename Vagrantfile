@@ -148,7 +148,7 @@ Vagrant.configure(2) do |config|
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
-     SHELL
+      SHELL
     end
 
     # Docker EE node for ubuntu 7.3
