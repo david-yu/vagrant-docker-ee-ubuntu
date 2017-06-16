@@ -15,6 +15,6 @@ sudo -E sh -c 'docker run --rm docker/dtr:2.2.5 install --ucp-url https://"${UCP
 sudo -E sh -c 'docker run --rm docker/dtr:2.2.5 backup --ucp-url https://${UCP_IPADDR} --existing-replica-id ${DTR_REPLICA_ID} --ucp-username admin --ucp-password ${UCP_PASSWORD} --ucp-ca "$(cat ucp-ca.pem)" > /tmp/backup.tar'
 
 # Trust self-signed DTR CA
-sudo curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt
+sudo sh -c 'curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt'
 sudo update-ca-certificates
-sudo service docker restart
+sudo systemctl restart docker

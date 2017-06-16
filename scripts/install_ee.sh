@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install Docker EE engine
 export DOCKER_EE_URL=$(cat /vagrant/ee_url)
 sudo curl -fsSL ${DOCKER_EE_URL}/gpg | sudo apt-key add
