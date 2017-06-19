@@ -1,4 +1,5 @@
 DTR_URL=dtr.local
+DTR_PASSWORD=$(cat /vagrant/ucp_password)
 # create users
 createUser() {
 	USER_NAME=$1
@@ -30,7 +31,7 @@ createOrg() {
 createOrg engineering
 createOrg infrastructure
 # import notary private key
-# notary -d ~/.docker/trust key import /home/ubuntu/ucp-bundle-admin/key.pem
+./notary -d ~/.docker/trust key import /home/ubuntu/ucp-bundle-admin/key.pem
 # create repositories
 createRepo() {
     REPO_NAME=$1
@@ -47,9 +48,9 @@ createRepo() {
       \"longDescription\": \"\",
       \"visibility\": \"public\"}" \
       "https://${DTR_URL}/api/v0/repositories/${ORG_NAME}"
-    # notary -d ~/.docker/trust -s ${DTR_URL} init ${DTR_URL}/${ORG_NAME}/${REPO_NAME}
-    # notary -d ~/.docker/trust -s ${DTR_URL} key rotate ${DTR_URL}/${ORG_NAME}/${REPO_NAME} snapshot -r
-    # notary -d ~/.docker/trust publish -s ${DTR_URL} ${DTR_URL}/${ORG_NAME}/${REPO_NAME}
+    ./notary -d ~/.docker/trust -s https://${DTR_URL} init https://${DTR_URL}/${ORG_NAME}/${REPO_NAME}
+    ./notary -d ~/.docker/trust -s https://${DTR_URL} key rotate https://${DTR_URL}/${ORG_NAME}/${REPO_NAME} snapshot -r
+    ./notary -d ~/.docker/trust publish -s https://${DTR_URL} https://${DTR_URL}/${ORG_NAME}/${REPO_NAME}
 }
 createRepo mongo engineering
 createRepo wordpress engineering
@@ -61,13 +62,14 @@ docker pull wordpress
 docker pull mariadb
 # build custom images
 git clone https://github.com/yongshin/leroy-jenkins.git
-docker build -t leroy-jenkins /home/ubuntu/leroy-jenkins/Dockerfile
+docker build -t leroy-jenkins /home/ubuntu/leroy-jenkins/
 # tag images
 docker tag mongo ${DTR_URL}/engineering/mongo:latest
 docker tag wordpress ${DTR_URL}/engineering/wordpress:latest
 docker tag mariadb ${DTR_URL}/engineering/mariadb:latest
 docker tag leroy-jenkins ${DTR_URL}/infrastructure/leroy-jenkins:latest
 # push signed images
+docker login dtr.local -u admin -p ${DTR_PASSWORD}
 docker push ${DTR_URL}/engineering/mongo:latest
 docker push ${DTR_URL}/engineering/wordpress:latest
 docker push ${DTR_URL}/engineering/mariadb:latest
