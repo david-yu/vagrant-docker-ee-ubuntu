@@ -28,6 +28,9 @@ Vagrant.configure(2) do |config|
       haproxy_node.landrush.tld = 'local'
       haproxy_node.landrush.host 'dtr.local', '172.28.128.30'
       haproxy_node.landrush.host 'ucp.local', '172.28.128.30'
+      haproxy_node.landrush.host 'wordpress.local', '172.28.128.31'
+      haproxy_node.landrush.host 'jenkins.local', '172.28.128.31'
+      haproxy_node.landrush.host 'nodeapp.local', '172.28.128.31'
       haproxy_node.vm.provision "shell", inline: <<-SHELL
        sudo apt-get update
        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
@@ -146,7 +149,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
         sudo chmod +x install_dtr.sh
-        sudo chmod +x prepoluate_dtr.sh
+        sudo chmod +x prepopluate_dtr.sh
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
@@ -161,11 +164,36 @@ Vagrant.configure(2) do |config|
       ubuntu_worker_node1.vm.hostname = "worker-node1.local"
       ubuntu_worker_node1.landrush.enabled = true
       config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "2048"]
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
         vb.name = "ubuntu-worker-node1"
       end
       ubuntu_worker_node1.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo ntpdate -s time.nist.gov
+        sudo cp /vagrant/scripts/install_ee.sh .
+        sudo cp /vagrant/scripts/join_worker.sh .
+        sudo chmod +x install_ee.sh
+        sudo chmod +x join_worker.sh
+        ./install_ee.sh
+        ./join_worker.sh
+     SHELL
+    end
+
+    # Docker EE node for ubuntu 7.3
+    config.vm.define "worker-node2" do |ubuntu_worker_node2|
+      ubuntu_worker_node2.vm.box = "ubuntu/xenial64"
+      ubuntu_worker_node2.vm.network "private_network", ip: "172.28.128.36"
+      ubuntu_worker_node2.landrush.tld = 'local'
+      ubuntu_worker_node2.vm.hostname = "worker-node2.local"
+      ubuntu_worker_node2.landrush.enabled = true
+      config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
+        vb.customize ["modifyvm", :id, "--cpus", "2"]
+        vb.name = "ubuntu-worker-node2"
+      end
+      ubuntu_worker_node2.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov

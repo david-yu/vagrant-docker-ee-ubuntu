@@ -1,5 +1,6 @@
 DTR_URL=dtr.local
 DTR_PASSWORD=$(cat /vagrant/ucp_password)
+NOTARY_OPTS="-s https://${DTR_URL} -d ${HOME}/.docker/trust"
 # create users
 createUser() {
 	USER_NAME=$1
@@ -30,6 +31,17 @@ createOrg() {
 }
 createOrg engineering
 createOrg infrastructure
+
+cat > /tmp/notary_expect.exp <<EOL
+#!/usr/bin/env expect -f
+eval spawn notary \$env(NOTARY_PARAMS)
+expect "Enter username: "
+send "\$env(USER_NAME)\r"
+expect "Enter password: "
+send "\$env(DTR_PASSWORD)\r"
+expect eof
+EOL
+
 # import notary private key
 ./notary -d ~/.docker/trust key import /home/ubuntu/ucp-bundle-admin/key.pem
 # create repositories
@@ -48,7 +60,7 @@ createRepo() {
       \"longDescription\": \"\",
       \"visibility\": \"public\"}" \
       "https://${DTR_URL}/api/v0/repositories/${ORG_NAME}"
-    ./notary -d ~/.docker/trust -s https://${DTR_URL} init https://${DTR_URL}/${ORG_NAME}/${REPO_NAME}
+    NOTARY_PARAMS="${NOTARY_OPTS} init ${DTR_URL}/${NAMESPACE}/${i}" ./notary -d ~/.docker/trust -s https://${DTR_URL} init https://${DTR_URL}/${ORG_NAME}/${REPO_NAME}
     ./notary -d ~/.docker/trust -s https://${DTR_URL} key rotate https://${DTR_URL}/${ORG_NAME}/${REPO_NAME} snapshot -r
     ./notary -d ~/.docker/trust publish -s https://${DTR_URL} https://${DTR_URL}/${ORG_NAME}/${REPO_NAME}
 }
