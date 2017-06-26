@@ -15,6 +15,13 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `dtr-node1` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
 
+DNS entries for landrush:
+- `dtr.local`: 172.28.128.30
+- `ucp.local`: 172.28.128.30
+- `wordpress.local`: 172.28.128.31
+- `jenkins.local`: 172.28.128.31
+- `nodeapp.local`: 172.28.128.31
+- `visualizer.local`: 172.28.128.31
 
 ## Download vagrant from Vagrant website
 

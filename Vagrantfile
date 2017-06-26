@@ -31,6 +31,7 @@ Vagrant.configure(2) do |config|
       haproxy_node.landrush.host 'wordpress.local', '172.28.128.31'
       haproxy_node.landrush.host 'jenkins.local', '172.28.128.31'
       haproxy_node.landrush.host 'nodeapp.local', '172.28.128.31'
+      haproxy_node.landrush.host 'visualizer.local', '172.28.128.31'
       haproxy_node.vm.provision "shell", inline: <<-SHELL
        sudo apt-get update
        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
@@ -149,7 +150,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
         sudo chmod +x install_dtr.sh
-        sudo chmod +x prepopluate_dtr.sh
+        sudo chmod +x prepopulate_dtr.sh
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
