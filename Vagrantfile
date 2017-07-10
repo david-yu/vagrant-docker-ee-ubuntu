@@ -147,10 +147,12 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/join_worker.sh .
         sudo cp /vagrant/scripts/install_dtr.sh .
         sudo cp /vagrant/scripts/prepoluate_dtr.sh .
+        sudo cp /vagrant/scripts/backup_dtr.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
         sudo chmod +x install_dtr.sh
         sudo chmod +x prepopulate_dtr.sh
+        sudo chmod +x backup_dtr.sh
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
@@ -202,6 +204,7 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/join_worker.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
+        sleep 5
         ./install_ee.sh
         ./join_worker.sh
      SHELL
