@@ -63,7 +63,7 @@ $ vagrant plugin install vagrant-multiprovider-snap
 ## Bring up nodes
 
 ```
-$ vagrant up haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2
+$ make start
 # Flush Mac's DNS cache
 $ sudo killall -HUP mDNSResponder
 ```
@@ -71,13 +71,13 @@ $ sudo killall -HUP mDNSResponder
 ## Stop nodes
 
 ```
-$ vagrant halt haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2
+$ make stop
 ```
 
 ## Destroy nodes
 
 ```
-$ vagrant destroy haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2
+$ make destroy
 ```
 
 ## Snapshot nodes
