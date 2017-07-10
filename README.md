@@ -84,7 +84,7 @@ $ vagrant destroy haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 w
 
 ```
 # Take initial snapshot of nodes
-$ ./snapshot.sh
+$ make snap
 # Restore initial snapshot
-$ ./rollback.sh
+$ make rollback
 ```
