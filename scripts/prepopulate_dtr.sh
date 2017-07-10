@@ -1,3 +1,4 @@
+#!/bin/bash
 DTR_URL=dtr.local
 DTR_PASSWORD=$(cat /vagrant/ucp_password)
 NOTARY_OPTS="-s https://${DTR_URL} -d ${HOME}/.docker/trust"
