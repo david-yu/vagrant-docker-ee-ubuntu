@@ -14,6 +14,7 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `ucp-node3` (UCP manager node3): 172.28.128.33
 - `dtr-node1` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
+- `worker-node2` (Worker node): 172.28.128.36
 
 DNS entries for landrush:
 - `dtr.local`: 172.28.128.30
