@@ -45,8 +45,8 @@ $ vagrant init ubuntu/xenial64
 ## Create files in project to store environment variables with custom values for use by Vagrant
 ```
 ee_url
-ucp_password
 ucp_username
+ucp_password
 ```
 
 ## Provide Docker EE license in project folder
