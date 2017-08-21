@@ -23,6 +23,7 @@ DNS entries for landrush:
 - `jenkins.local`: 172.28.128.31
 - `nodeapp.local`: 172.28.128.31
 - `visualizer.local`: 172.28.128.31
+- `gitlab.local`: 172.28.128.31
 
 ## Download vagrant from Vagrant website
 

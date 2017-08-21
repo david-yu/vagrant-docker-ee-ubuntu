@@ -32,6 +32,7 @@ Vagrant.configure(2) do |config|
       haproxy_node.landrush.host 'jenkins.local', '172.28.128.31'
       haproxy_node.landrush.host 'nodeapp.local', '172.28.128.31'
       haproxy_node.landrush.host 'visualizer.local', '172.28.128.31'
+      haproxy_node.landrush.host 'gitlab.local', '172.28.128.31'
       haproxy_node.vm.provision "shell", inline: <<-SHELL
        sudo apt-get update
        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
