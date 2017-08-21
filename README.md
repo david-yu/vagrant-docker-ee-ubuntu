@@ -1,4 +1,4 @@
-Vagrant Virtualbox setup for Docker EE 17.03 on Ubuntu Xenial 16.04
+Vagrant Virtualbox setup for Docker EE 17.06 on Ubuntu Xenial 16.04
 ========================
 
 This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs HAProxy for loadbalancing, Docker EE, UCP, and DTR. This can be used as a demo environment on your local machine, when internet access is not present.
