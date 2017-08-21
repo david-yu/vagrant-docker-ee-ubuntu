@@ -7,15 +7,13 @@ export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
 export DTR_VERSION=2.3.0
 
-sudo -E sh -c 'curl -k https://${UCP_IPADDR}/ca > /home/ubuntu/ucp-ca.pem'
-
 # Sleep 35 seconds to wait for node registration
 sleep 35
 
 # Install DTR
-sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr-node1 --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username admin --ucp-password "${UCP_PASSWORD}" --ucp-ca "$(cat ucp-ca.pem)"'
+sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr-node1 --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username admin --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls'
 # Run backup of DTR
-sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} backup --ucp-url https://${UCP_IPADDR} --existing-replica-id ${DTR_REPLICA_ID} --ucp-username admin --ucp-password ${UCP_PASSWORD} --ucp-ca "$(cat ucp-ca.pem)" > /tmp/backup.tar'
+sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} backup --ucp-url https://${UCP_IPADDR} --existing-replica-id ${DTR_REPLICA_ID} --ucp-username admin --ucp-password ${UCP_PASSWORD} --ucp-insecure-tls" > /tmp/backup.tar'
 
 # Trust self-signed DTR CA
 sudo sh -c 'curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt'
