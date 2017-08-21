@@ -46,6 +46,7 @@ $ vagrant init ubuntu/xenial64
 ```
 ee_url
 ucp_password
+ucp_username
 ```
 
 ## Provide Docker EE license in project folder

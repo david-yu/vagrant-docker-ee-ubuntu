@@ -5,6 +5,7 @@ ee_url
 dtr-replica-id
 dtr-node1-ipaddr
 ucp_password
+ucp_username
 ucp-node1-ipaddr
 ucp-id
 haproxy-node
