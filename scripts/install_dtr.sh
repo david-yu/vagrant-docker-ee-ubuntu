@@ -5,7 +5,7 @@ ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant
 export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
-export DTR_VERSION=2.2.5
+export DTR_VERSION=2.3.0
 
 sudo -E sh -c 'curl -k https://${UCP_IPADDR}/ca > /home/ubuntu/ucp-ca.pem'
 
