@@ -77,7 +77,7 @@ Vagrant.configure(2) do |config|
         ./install_ee.sh
         ./install_ucp.sh
         ./create_tokens.sh
-        ./visualizer.sh
+        # ./visualizer.sh
      SHELL
     end
 
