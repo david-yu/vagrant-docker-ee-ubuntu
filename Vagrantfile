@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
       haproxy_node.vm.hostname = "haproxy.local"
       haproxy_node.hostsupdater.aliases = ["ucp.local", "dtr.local"]
       config.vm.provider :virtualbox do |vb|
-         vb.customize ["modifyvm", :id, "--memory", "1024"]
+         vb.customize ["modifyvm", :id, "--memory", "512"]
          vb.customize ["modifyvm", :id, "--cpus", "1"]
          vb.name = "ubuntu-haproxy-node"
       end

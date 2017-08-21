@@ -10,8 +10,8 @@ After running `vagrant up`:
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
 - `haproxy` (HAProxy LB): 172.28.128.30
 - `ucp-node1` (UCP manager node): 172.28.128.31
-- `ucp-node2` (UCP manager node2): 172.28.128.32
-- `ucp-node3` (UCP manager node3): 172.28.128.33
+- `ucp-node2` (UCP manager node2, not provisioned - optional): 172.28.128.32
+- `ucp-node3` (UCP manager node3, not provisioned - optional): 172.28.128.33
 - `dtr-node1` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
@@ -66,8 +66,6 @@ $ vagrant plugin install vagrant-multiprovider-snap
 
 ```
 $ make start
-# Flush Mac's DNS cache
-$ sudo killall -HUP mDNSResponder
 ```
 
 ## Stop nodes

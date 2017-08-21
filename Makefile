@@ -8,6 +8,7 @@ help:    ## Show this help.
 
 start:
 	@vagrant up haproxy ucp-node1 dtr-node1 worker-node1 worker-node2
+	sudo killall -HUP mDNSResponder
 
 stop:
 	@vagrant halt haproxy ucp-node1 dtr-node1 worker-node1 worker-node2
