@@ -10,4 +10,4 @@ docker swarm join-token manager | awk -F " " '/token/ {print $2}' > /vagrant/swa
 docker swarm join-token worker | awk -F " " '/token/ {print $2}' > /vagrant/swarm-join-token-worker
 docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} id | awk '{ print $1}' > /vagrant/ucp-id
 export UCP_ID=$(cat /vagrant/ucp-id)
-docker run --rm -i --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} backup --id ${UCP_ID} --root-ca-only --log-driver none --passphrase "secret" > /vagrant/backup.tar
+docker run --rm -i --log-driver none --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} backup --id ${UCP_ID} --root-ca-only --passphrase "secret" > /vagrant/backup.tar
