@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "haproxy" do |haproxy_node|
       haproxy_node.vm.box = "ubuntu/xenial64"
       haproxy_node.vm.network "private_network", ip: "172.28.128.30"
@@ -50,7 +50,7 @@ Vagrant.configure(2) do |config|
       SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "ucp-node1" do |ubuntu_ucp_node1|
       ubuntu_ucp_node1.vm.box = "ubuntu/xenial64"
       ubuntu_ucp_node1.vm.network "private_network", ip: "172.28.128.31"
@@ -81,7 +81,7 @@ Vagrant.configure(2) do |config|
      SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "ucp-node2" do |ubuntu_ucp_node2|
       ubuntu_ucp_node2.vm.box = "ubuntu/xenial64"
       ubuntu_ucp_node2.vm.network "private_network", ip: "172.28.128.32"
@@ -106,7 +106,7 @@ Vagrant.configure(2) do |config|
       SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "ucp-node3" do |ubuntu_ucp_node3|
       ubuntu_ucp_node3.vm.box = "ubuntu/xenial64"
       ubuntu_ucp_node3.vm.network "private_network", ip: "172.28.128.33"
@@ -131,7 +131,7 @@ Vagrant.configure(2) do |config|
      SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE DTR node for ubuntu 16.04
     config.vm.define "dtr-node1" do |ubuntu_dtr_node1|
       ubuntu_dtr_node1.vm.box = "ubuntu/xenial64"
       ubuntu_dtr_node1.vm.network "private_network", ip: "172.28.128.34"
@@ -160,10 +160,12 @@ Vagrant.configure(2) do |config|
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
+        ./prepopulate_dtr.sh
+        ./backup_dtr.sh
       SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "worker-node1" do |ubuntu_worker_node1|
       ubuntu_worker_node1.vm.box = "ubuntu/xenial64"
       ubuntu_worker_node1.vm.network "private_network", ip: "172.28.128.35"
@@ -188,7 +190,7 @@ Vagrant.configure(2) do |config|
      SHELL
     end
 
-    # Docker EE node for ubuntu 7.3
+    # Docker EE node for ubuntu 16.04
     config.vm.define "worker-node2" do |ubuntu_worker_node2|
       ubuntu_worker_node2.vm.box = "ubuntu/xenial64"
       ubuntu_worker_node2.vm.network "private_network", ip: "172.28.128.36"
