@@ -1,5 +1,5 @@
 #!/bin/bash
-export UCP_VERSION=2.2.0
+export UCP_VERSION=2.2.2
 
 ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/ucp-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
