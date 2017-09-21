@@ -57,34 +57,34 @@ docker_subscription.lic
 ## Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
 ```
 
-$ vagrant plugin install landrush
-$ vagrant plugin install vagrant-hostsupdater
-$ vagrant plugin install vagrant-multiprovider-snap
+vagrant plugin install landrush
+vagrant plugin install vagrant-hostsupdater
+vagrant plugin install vagrant-multiprovider-snap
 ```
 
 ## Bring up nodes
 
 ```
-$ make start
+make start
 ```
 
 ## Stop nodes
 
 ```
-$ make stop
+make stop
 ```
 
 ## Destroy nodes
 
 ```
-$ make destroy
+make destroy
 ```
 
 ## Snapshot nodes
 
 ```
 # Take initial snapshot of nodes
-$ make snap
+make snap
 # Restore initial snapshot
-$ make rollback
+make rollback
 ```
