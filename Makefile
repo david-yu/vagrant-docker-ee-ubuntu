@@ -23,4 +23,4 @@ build:
 	@vagrant provision
 
 destroy:
-	@vagrant destroy haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2
+	@vagrant destroy -f haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2
