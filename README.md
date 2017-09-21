@@ -44,7 +44,7 @@ ucp_username
 ucp_password
 ```
 
-For the eeurl file make sure the format of the ee_url is like the following
+For the `ee_url` file make sure the format of the ee_url is like the following
 ```
 https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx/ubuntu/
 ```
