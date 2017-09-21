@@ -37,11 +37,6 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Download Ubuntu Xenial box
-```
-$ vagrant init ubuntu/xenial64
-```
-
 ## Create files in project to store environment variables with custom values for use by Vagrant
 ```
 ee_url
@@ -49,7 +44,12 @@ ucp_username
 ucp_password
 ```
 
-## Provide Docker EE license in project folder
+For the eeurl file make sure the format of the ee_url is like the following
+```
+https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx/ubuntu/
+```
+
+## Provide Docker EE license in project folder (will fail if not provided)
 ```
 docker_subscription.lic
 ```
