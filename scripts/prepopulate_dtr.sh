@@ -8,7 +8,7 @@ createUser() {
 	USER_NAME=$1
   FULL_NAME=$2
   curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user admin:dockeradmin -d "{
+    --user docker:dockeradmin -d "{
       \"isOrg\": false,
       \"isAdmin\": false,
       \"isActive\": true,
@@ -26,7 +26,7 @@ createUser chad 'Chad Metcalf'
 createOrg() {
 	ORG_NAME=$1
 	curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user admin:dockeradmin -d "{
+    --user docker:dockeradmin -d "{
       \"isOrg\": true,
       \"name\": \"${ORG_NAME}\"}" \
       "https://${DTR_URL}/enzi/v0/accounts"
@@ -39,7 +39,7 @@ createRepo() {
     REPO_NAME=$1
     ORG_NAME=$2
     curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-      --user admin:dockeradmin -d "{
+      --user docker:dockeradmin -d "{
       \"name\": \"${REPO_NAME}\",
       \"shortDescription\": \"\",
       \"longDescription\": \"\",
@@ -63,7 +63,7 @@ docker tag wordpress ${DTR_URL}/engineering/wordpress:latest
 docker tag mariadb ${DTR_URL}/engineering/mariadb:latest
 docker tag leroy-jenkins ${DTR_URL}/infrastructure/leroy-jenkins:latest
 # push signed images
-docker login dtr.local -u admin -p ${DTR_PASSWORD}
+docker login dtr.local -u docker -p ${DTR_PASSWORD}
 docker push ${DTR_URL}/engineering/mongo:latest
 docker push ${DTR_URL}/engineering/wordpress:latest
 docker push ${DTR_URL}/engineering/mariadb:latest
