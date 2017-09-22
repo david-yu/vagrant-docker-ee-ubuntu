@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DTR_VERSION=2.3.2
+export DTR_VERSION=2.3.3
 export UCP_IPADDR=$(cat /vagrant/ucp-vancouver-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)

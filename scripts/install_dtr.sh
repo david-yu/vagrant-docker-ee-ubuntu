@@ -6,7 +6,7 @@ export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
 export UCP_USERNAME=$(cat /vagrant/ucp_username)
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
-export DTR_VERSION=2.3.0
+export DTR_VERSION=2.3.3
 
 # Sleep 35 seconds to wait for node registration
 sleep 35
