@@ -1,14 +1,17 @@
 #!/bin/bash
 
+DTR_USERNAME=$(cat /vagrant/ucp_username)
 DTR_URL=dtr.local
 DTR_PASSWORD=$(cat /vagrant/ucp_password)
+
+sleep 30
 
 # create users
 createUser() {
 	USER_NAME=$1
   FULL_NAME=$2
-  curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user admin:dockeradmin -d "{
+  curl -k -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
+    --user ${DTR_USERNAME}:${DTR_PASSWORD} -d "{
       \"isOrg\": false,
       \"isAdmin\": false,
       \"isActive\": true,
@@ -26,7 +29,7 @@ createUser chad 'Chad Metcalf'
 createOrg() {
 	ORG_NAME=$1
 	curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user admin:dockeradmin -d "{
+    --user ${DTR_USERNAME}:${DTR_PASSWORD} -d "{
       \"isOrg\": true,
       \"name\": \"${ORG_NAME}\"}" \
       "https://${DTR_URL}/enzi/v0/accounts"
@@ -39,7 +42,7 @@ createRepo() {
     REPO_NAME=$1
     ORG_NAME=$2
     curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-      --user admin:dockeradmin -d "{
+      --user ${DTR_USERNAME}:${DTR_PASSWORD} -d "{
       \"name\": \"${REPO_NAME}\",
       \"shortDescription\": \"\",
       \"longDescription\": \"\",
@@ -63,7 +66,7 @@ docker tag wordpress ${DTR_URL}/engineering/wordpress:latest
 docker tag mariadb ${DTR_URL}/engineering/mariadb:latest
 docker tag leroy-jenkins ${DTR_URL}/infrastructure/leroy-jenkins:latest
 # push signed images
-docker login dtr.local -u admin -p ${DTR_PASSWORD}
+docker login dtr.local -u ${DTR_USERNAME} -p ${DTR_PASSWORD}
 docker push ${DTR_URL}/engineering/mongo:latest
 docker push ${DTR_URL}/engineering/wordpress:latest
 docker push ${DTR_URL}/engineering/mariadb:latest
