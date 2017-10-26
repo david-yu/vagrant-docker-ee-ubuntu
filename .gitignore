@@ -12,3 +12,5 @@ swarm-join-token-*
 *.lic
 *.pem
 *.tar
+*.tar.gz
+*.deb
