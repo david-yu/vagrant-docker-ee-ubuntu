@@ -44,10 +44,18 @@ ucp_username
 ucp_password
 ```
 
-For the `ee_url` file make sure the format of the ee_url is like the following
+Download the latest Docker EE deb package from your subscription URL to the `package` directory.
 ```
-https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx/ubuntu/
+https://storebits.docker.com/ee/m/sub-xxx-xxx-xxx-xxx-xxx/dists/xenial/pool/stable/amd64/
 ```
+
+## Offline installation
+You can run offline deployments by storing the UCP and DTR images locally. Download them from here to the images directory:
+
+UCP:
+DTR:
+
+Vagrant will automatically load these images if they exist. If not they will be pulled.
 
 ## Provide Docker EE license in project folder (will fail if not provided)
 ```
