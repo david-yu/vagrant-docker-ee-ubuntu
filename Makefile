@@ -19,8 +19,5 @@ snap: ## snapshot all vms
 rollback: ## rollback to the previous snapshot
 	./scripts/rollback.sh
 
-build:
-	@vagrant provision
-
 destroy:
 	@vagrant destroy -f haproxy ucp-node1 ucp-node2 ucp-node3 dtr-node1 worker-node1 worker-node2

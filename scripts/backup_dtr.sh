@@ -3,7 +3,6 @@
 export UCP_PASSWORD=$(cat /vagrant/ucp_password)
 export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
 export DTR_IPADDR=$(cat /vagrant/dtr-node1-ipaddr)
-export SWARM_JOIN_TOKEN_WORKER=$(cat /vagrant/swarm-join-token-worker)
 export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
 export DTR_VERSION=2.3.3
 
