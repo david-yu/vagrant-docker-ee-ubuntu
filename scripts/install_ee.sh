@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # Install Docker EE engine
-export DOCKER_EE_URL=$(cat /vagrant/ee_url)
-sudo curl -fsSL ${DOCKER_EE_URL}/gpg | sudo apt-key add
-sudo add-apt-repository "deb [arch=amd64] ${DOCKER_EE_URL} $(lsb_release -cs) stable-17.06"
-sudo apt-get update
-sudo apt-get -y install docker-ee
+sudo dpkg -i /vagrant/package/docker-ee*
+sudo apt-get -y install -f
 sudo usermod -aG docker ubuntu
 
 # Configure dns for Docker
