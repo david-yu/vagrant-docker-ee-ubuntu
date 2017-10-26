@@ -11,10 +11,18 @@ export DTR_VERSION=2.3.3
 # Sleep 35 seconds to wait for node registration
 sleep 35
 
+# Check for local image file
+for f in /vagrant/images/dtr*; do
+    [ -e "$f" ] && docker load < /vagrant/images/dtr* || echo "Local DTR image does not exist"
+    break
+done
+
 # Install DTR
 sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr-node1 --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username "${UCP_USERNAME}" --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls'
 # Run backup of DTR
-sudo -E sh -c 'docker run --rm --log-driver none docker/dtr:${DTR_VERSION} backup --ucp-url https://${UCP_IPADDR} --existing-replica-id ${DTR_REPLICA_ID} --ucp-username admin --ucp-password ${UCP_PASSWORD} --ucp-insecure-tls" > /tmp/backup.tar'
+sudo -E sh -c 'docker run --rm --log-driver none docker/dtr:${DTR_VERSION} backup --ucp-url https://"${UCP_IPADDR}" --existing-replica-id "${DTR_REPLICA_ID}" --ucp-username "${UCP_USERNAME}" --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls > /tmp/backup.tar'
+
+sleep 20
 
 # Trust self-signed DTR CA
 sudo sh -c 'curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt'
