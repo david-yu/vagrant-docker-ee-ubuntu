@@ -37,9 +37,8 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Create files in project to store environment variables with custom values for use by Vagrant
+## Create files in the root of project to store environment variables with custom values for use by Vagrant
 ```
-ee_url
 ucp_username
 ucp_password
 ```
