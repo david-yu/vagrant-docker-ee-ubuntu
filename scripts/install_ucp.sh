@@ -11,3 +11,6 @@ docker swarm join-token worker | awk -F " " '/token/ {print $2}' > /vagrant/swar
 docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} id | awk '{ print $1}' > /vagrant/ucp-id
 export UCP_ID=$(cat /vagrant/ucp-id)
 docker run --rm -i --log-driver none --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} backup --id ${UCP_ID} --root-ca-only --passphrase "secret" > /vagrant/backup.tar
+# Enable HRM
+export AUTH_TOKEN="$(curl -sk -d '{"username":"admin","password":"${UCP_PASSWORD"}' "https://${UCP_IPADDR}/auth/login" | jq -r .auth_token 2>/dev/null)"
+curl -sk -X POST -H "Authorization: Bearer ${AUTH_TOKEN}" --header "Content-Type: application/json" --header "Accept: application/json" -d '{"HTTPPort":80,"HTTPSPort":8443}' "https://${UCP_IPADDR}/api/hrm"
