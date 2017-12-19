@@ -81,7 +81,7 @@ Vagrant.configure(2) do |config|
      SHELL
     end
 
-    # Docker EE node for ubuntu 16.04
+    # Docker EE manager node for ubuntu 16.04 (optional)
     config.vm.define "ucp-node2" do |ubuntu_ucp_node2|
       ubuntu_ucp_node2.vm.box = "ubuntu/xenial64"
       ubuntu_ucp_node2.vm.network "private_network", ip: "172.28.128.32"
@@ -106,7 +106,7 @@ Vagrant.configure(2) do |config|
       SHELL
     end
 
-    # Docker EE node for ubuntu 16.04
+    # Docker EE manager node for ubuntu 16.04 (optional)
     config.vm.define "ucp-node3" do |ubuntu_ucp_node3|
       ubuntu_ucp_node3.vm.box = "ubuntu/xenial64"
       ubuntu_ucp_node3.vm.network "private_network", ip: "172.28.128.33"
