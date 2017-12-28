@@ -9,13 +9,13 @@ After running `vagrant up`:
 - If installed, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin/admin)
 
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
-- `ucp-node1` (UCP manager node): 172.28.128.31
+- `ucp` (UCP manager node): 172.28.128.31
 - `ucp-node2` (UCP manager node2): 172.28.128.32 - Optional
 - `ucp-node3` (UCP manager node3): 172.28.128.33 - Optional
-- `dtr-node1` (DTR replica): 172.28.128.34
+- `dtr` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
-- `gitlab-node` (Gitlab node): 172.28.128.37
+- `gitlab` (Gitlab node): 172.28.128.37
 - `haproxy` (HA Proxy node): 172.28.128.30 - Optional
 - `jenkins` (Jenkins node): 172.28.128.38 - Optional
 
@@ -71,7 +71,7 @@ If you are thinking of customizing the start up of the cluster (i.e. no DTR, HA 
 
 ```
 start:
-	@vagrant up haproxy ucp worker-node1 worker-node2 
+	@vagrant up haproxy ucp worker-node1 worker-node2
 
 ...
 
@@ -83,6 +83,14 @@ Then you can run from the CLI
 
 ```
 make start
+```
+
+## SSH into nodes
+
+You can SSH directly into the nodes by specifying the names of each Vagrant VM
+
+```
+vagrant ssh ucp
 ```
 
 ## Stop nodes
