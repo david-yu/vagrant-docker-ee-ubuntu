@@ -1,7 +1,7 @@
 .vagrant
 *.vdi
 *.log
-env
+env/*
 *.lic
 *.pem
 *.tar

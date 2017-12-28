@@ -17,6 +17,7 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `worker-node2` (Worker node): 172.28.128.36
 - `gitlab-node` (Gitlab node): 172.28.128.37
 - `haproxy` (HA Proxy node): 172.28.128.30 - Optional
+- `jenkins` (Jenkins node): 172.28.128.38 - Optional
 
 DNS entries for landrush:
 - `dtr.local`: 172.28.128.30
@@ -39,7 +40,7 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Create files in the root of the `env` folder to store environment variables with custom values for use by Vagrant
+## Create files in the root of the `/env` folder to store environment variables with custom values for use by Vagrant
 ```
 ee_url
 ucp_username
@@ -51,9 +52,9 @@ For the `ee_url` file make sure the format of the ee_url is like the following
 https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx
 ```
 
-## Provide Docker EE license in `env` folder (will fail if not provided)
+## Provide Docker EE license in `/env` folder (will fail if not provided)
 ```
-env/docker_subscription.lic
+docker_subscription.lic
 ```
 
 ## Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
@@ -66,11 +67,11 @@ vagrant plugin install vagrant-multiprovider-snap
 
 ## Bring up nodes
 
-Modify `Makefile` `start`, `stop`, and `destroy` targets to manage certain nodes, if you only need a UCP manager node you can just edit the file to have the following entry for the `start` target.
+If you are thinking of customizing the start up of the cluster (i.e. no DTR, HA UCP, etc) modify the `Makefile` to describe the `start`, `stop`, and `destroy` targets to manage certain nodes, if you only need a UCP manager node you can just edit the file to have the following entry for the `start` target.
 
 ```
 start:
-	@vagrant up haproxy ucp-node1
+	@vagrant up haproxy ucp
 ```
 
 Then you can run from the CLI
