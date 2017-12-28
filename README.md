@@ -1,6 +1,8 @@
 Vagrant Virtualbox setup for Docker EE 2.0 on Ubuntu Xenial 16.04
 ========================
 
+## Overview
+
 This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs Docker EE, UCP, and DTR with embedded DNS. This can be used as a demo environment on your local machine, when internet access is not present.
 
 By default, after running `make start` the following will be provisioned and installed:
