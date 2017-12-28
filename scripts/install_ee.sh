@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Add additional DNS servers to help resolve storebits.docker.com domain
-
 sudo sh -c "echo 'nameserver 8.8.8.8
 nameserver 8.8.4.4' >> /etc/resolvconf/resolv.conf.d/base"
 sudo resolvconf -u
@@ -14,9 +13,10 @@ sudo apt-get update
 sudo apt-get -y install docker-ee
 sudo usermod -aG docker ubuntu
 
-# Configure dns for Docker
+# Configure DNS and Graph Driver for Docker
 sudo sh -c "echo '{
-  \"dns\":  [\"172.17.0.1\"]
+  \"dns\":  [\"172.17.0.1\"],
+  \"storage-driver\": \"overlay2\"
 }' >> /etc/docker/daemon.json"
 sudo systemctl daemon-reload
 sudo systemctl restart docker

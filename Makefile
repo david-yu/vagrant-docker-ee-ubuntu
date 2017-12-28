@@ -9,6 +9,10 @@ help:    ## Show this help.
 start:
 	@vagrant up ucp dtr worker-node1 worker-node2
 
+k8s:
+	echo 'true' > env/k8s
+	@vagrant up ucp worker-node1 worker-node2
+
 dtr:
 	@vagrant up dtr
 

@@ -12,7 +12,7 @@ apt-get update
 
 apt-get install -y --no-install-recommends httpie
 
-# install vim.
+# Install vim.
 apt-get install -y --no-install-recommends vim
 cat>/etc/vim/vimrc.local<<'EOF'
 syntax on
@@ -24,7 +24,7 @@ set nobackup
 autocmd BufNewFile,BufRead Vagrantfile set ft=ruby
 EOF
 
-# set the initial shell history.
+# Set the initial shell history.
 cat >~/.bash_history <<'EOF'
 tail -f /var/log/gitlab/gitlab-rails/*.log
 gitlab-ctl reconfigure
@@ -33,14 +33,14 @@ vim /etc/hosts
 netstat -antp
 EOF
 
-# install the gitlab deb repository.
+# Install the gitlab deb repository.
 apt-get install -y --no-install-recommends curl
 wget -qO- https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | bash -ex
 
-# install gitlab with the omnibus package.
+# Install gitlab with the omnibus package.
 apt-get install -y --no-install-recommends gitlab-ce
 
-# create a self-signed certificate and add it to the global trusted list.
+# Create a self-signed certificate and add it to the global trusted list.
 pushd /etc/ssl/private
 openssl genrsa \
     -out $domain-keypair.pem \
@@ -71,20 +71,17 @@ cp $domain-crt.pem /usr/local/share/ca-certificates/$domain.crt
 update-ca-certificates --verbose
 popd
 
-# configure gitlab to use it.
+# Configure gitlab to use it.
 install -m 700 -o root -g root -d /etc/gitlab/ssl
 ln -s /etc/ssl/private/$domain-keypair.pem /etc/gitlab/ssl/$domain.key
 ln -s /etc/ssl/private/$domain-crt.pem /etc/gitlab/ssl/$domain.crt
 sed -i -E "s,^(external_url\s+).+,\1'https://$domain'," /etc/gitlab/gitlab.rb
 sed -i -E "s,^(\s*#\s*)?(nginx\['redirect_http_to_https'\]\s+).+,\2= true," /etc/gitlab/gitlab.rb
 
-# show the changes we've made to gitlab.rb.
-diff -u /opt/gitlab/etc/gitlab.rb.template /etc/gitlab/gitlab.rb || test $? = 1
-
-# configure gitlab.
+# Configure gitlab.
 gitlab-ctl reconfigure
 
-# set the gitlab root user password.
+# Set the gitlab root user password.
 gitlab-rails console production <<'EOF'
 u = User.first
 u.password_automatically_set = false
@@ -93,7 +90,7 @@ u.password_confirmation = 'dockeradmin'
 u.save!
 EOF
 
-# set the gitlab sign in page title and description.
+# Set the gitlab sign in page title and description.
 gitlab-rails console production <<'EOF'
 a = Appearance.first_or_initialize
 a.title = 'Docker EE Gitlab'
@@ -101,10 +98,10 @@ a.description = 'Sign in on the right or [explore the public projects](/explore/
 a.save!
 EOF
 
-# see the gitlab services status.
+# See the gitlab services status.
 gitlab-ctl status
 
-# show software versions.
+# Show software versions.
 dpkg-query --showformat '${Package} ${Version}\n' --show gitlab-ce
 /opt/gitlab/embedded/bin/git --version
 /opt/gitlab/embedded/bin/ruby -v
