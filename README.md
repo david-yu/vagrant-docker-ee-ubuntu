@@ -6,7 +6,7 @@ This vagrant file is provided strictly for demonstration purposes to help setup 
 By default, after running `make start`:
 - UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker/<password in ucp_password file>)
 - DTR will be accessible from `https:\\dtr.local` resolved through DNS
-- 2 worker nodes (`worker-node1` and `worker-node2` will be provisioned with 1GB RAM and 1 CPU each
+- 2 worker nodes (`worker-node1` and `worker-node2`) will be provisioned with 1GB RAM and 1 CPU each
 - If installed, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin/admin)
 
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
@@ -16,7 +16,7 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `dtr` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
-- `gitlab` (Gitlab node): 172.28.128.37
+- `gitlab` (Gitlab node): 172.28.128.37 - Optional
 - `haproxy` (HA Proxy node): 172.28.128.30 - Optional
 - `jenkins` (Jenkins node): 172.28.128.38 - Optional
 
