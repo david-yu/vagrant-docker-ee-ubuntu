@@ -3,11 +3,10 @@ Vagrant Virtualbox setup for Docker EE 2.0 on Ubuntu Xenial 16.04
 
 This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs Docker EE, UCP, and DTR with embedded DNS. This can be used as a demo environment on your local machine, when internet access is not present.
 
-By default, after running `make start`:
-- UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker / {password in `ucp_password` file})
-- DTR will be accessible from `https:\\dtr.local` resolved through DNS
-- 2 worker nodes (`worker-node1` and `worker-node2`) will be provisioned with 1GB RAM and 1 CPU each
-- If installed, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin / admin)
+By default, after running `make start` the following will be provisioned and installed:
+- UCP node - UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker / {password in `ucp_password` file})
+- DTR node - DTR will be accessible from `https:\\dtr.local` resolved through DNS
+- 2 worker nodes (`worker-node1` and `worker-node2`) - provisioned with 1GB RAM and 1 CPU each
 
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
 - `ucp` (UCP manager node): 172.28.128.31
@@ -17,7 +16,7 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
 - `gitlab` (Gitlab node): 172.28.128.37 - Optional
-- `haproxy` (HA Proxy node): 172.28.128.30 - Optional
+- `haproxy` (HA Proxy node): 172.28.128.30 - Optional, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin / admin)
 - `jenkins` (Jenkins node): 172.28.128.38 - Optional
 
 DNS entries for landrush:
