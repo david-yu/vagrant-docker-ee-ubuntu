@@ -71,7 +71,12 @@ If you are thinking of customizing the start up of the cluster (i.e. no DTR, HA 
 
 ```
 start:
-	@vagrant up haproxy ucp
+	@vagrant up haproxy ucp worker-node1 worker-node2 
+
+...
+
+destroy:
+	@vagrant destroy -f ucp worker-node1 worker-node2
 ```
 
 Then you can run from the CLI
@@ -97,6 +102,7 @@ make destroy
 ```
 # Take initial snapshot of nodes
 make snap
+
 # Restore initial snapshot
 make rollback
 ```
