@@ -24,7 +24,7 @@ export AUTH_TOKEN="$(curl -sk -d "{\"username\":\"$UCP_USERNAME\",\"password\":\
 curl -sk -X POST -H "Authorization: Bearer ${AUTH_TOKEN}" --header "Content-Type: application/json" --header "Accept: application/json" -d '{"HTTPPort":80,"HTTPSPort":8443,"Arch":"x86_64"}' "https://${UCP_IPADDR}/api/interlock"
 
 # Enable k8s by default
-if [[ $(cat /vagrant/env/k8s) ]]; then
+if [ -f /vagrant/env/k8s ]; then
   # CURRENT_CONFIG_NAME will be the name of the currently active UCP configuration
   CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}')
   # Collect the current config with `docker config inspect`
