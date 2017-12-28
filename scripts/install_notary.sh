@@ -2,8 +2,8 @@
 
 sudo apt-get install -y unzip jq
 
-export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
-export UCP_PASSWORD=$(cat /vagrant/ucp_password)
+export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
+export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 # Download UCP client bundle
 echo "Retrieving authtoken"

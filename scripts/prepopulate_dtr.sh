@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DTR_URL=dtr.local
-DTR_PASSWORD=$(cat /vagrant/ucp_password)
+DTR_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 # create users
 createUser() {

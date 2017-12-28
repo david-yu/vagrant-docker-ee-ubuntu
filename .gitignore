@@ -1,14 +1,7 @@
 .vagrant
 *.vdi
 *.log
-ee_url
-dtr-replica-id
-dtr-node1-ipaddr
-ucp_password
-ucp-node1-ipaddr
-ucp-id
-haproxy-node
-swarm-join-token-*
+env
 *.lic
 *.pem
 *.tar

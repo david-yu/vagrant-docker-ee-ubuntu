@@ -1,20 +1,22 @@
-Vagrant Virtualbox setup for Docker EE 17.06 on Ubuntu Xenial 16.04
+Vagrant Virtualbox setup for Docker EE 2.0 on Ubuntu Xenial 16.04
 ========================
 
-This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs HAProxy for loadbalancing, Docker EE, UCP, and DTR. This can be used as a demo environment on your local machine, when internet access is not present.
+This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs Docker EE, UCP, and DTR with embedded DNS. This can be used as a demo environment on your local machine, when internet access is not present.
 
 After running `vagrant up`:
-- UCP will be accessible from `https:\\ucp.local`
-- DTR will be accessible from `https:\\dtr.local`
+- UCP will be accessible from `https:\\ucp.local` resolved through DNS
+- DTR will be accessible from `https:\\dtr.local` resolved through DNS
+- If installed, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin/admin)
 
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
-- `haproxy` (HAProxy LB): 172.28.128.30
 - `ucp-node1` (UCP manager node): 172.28.128.31
 - `ucp-node2` (UCP manager node2, not provisioned - optional): 172.28.128.32
 - `ucp-node3` (UCP manager node3, not provisioned - optional): 172.28.128.33
 - `dtr-node1` (DTR replica): 172.28.128.34
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
+- `gitlab-node` (Gitlab node): 172.28.128.37
+- `haproxy` (HA Proxy node): 172.28.128.30 - Optional
 
 DNS entries for landrush:
 - `dtr.local`: 172.28.128.30
@@ -37,7 +39,7 @@ https://www.vagrantup.com/downloads.html
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-## Create files in project to store environment variables with custom values for use by Vagrant
+## Create files in the root of the `env` folder to store environment variables with custom values for use by Vagrant
 ```
 ee_url
 ucp_username
@@ -46,12 +48,12 @@ ucp_password
 
 For the `ee_url` file make sure the format of the ee_url is like the following
 ```
-https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx/ubuntu/
+https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx
 ```
 
-## Provide Docker EE license in project folder (will fail if not provided)
+## Provide Docker EE license in `env` folder (will fail if not provided)
 ```
-docker_subscription.lic
+env/docker_subscription.lic
 ```
 
 ## Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
@@ -63,6 +65,15 @@ vagrant plugin install vagrant-multiprovider-snap
 ```
 
 ## Bring up nodes
+
+Modify `Makefile` `start`, `stop`, and `destroy` targets to manage certain nodes, if you only need a UCP manager node you can just edit the file to have the following entry for the `start` target.
+
+```
+start:
+	@vagrant up haproxy ucp-node1
+```
+
+Then you can run from the CLI
 
 ```
 make start

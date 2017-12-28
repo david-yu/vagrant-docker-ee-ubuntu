@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
-export DTR_IPADDR=$(cat /vagrant/dtr-node1-ipaddr)
-export UCP_PASSWORD=$(cat /vagrant/ucp_password)
+export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
+export DTR_IPADDR=$(cat /vagrant/env/dtr-node1-ipaddr)
+export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 curl -k https://${UCP_IPADDR}/ca > ucp-ca.pem
 docker run --rm --it docker/dtr:2.2.5 destroy --ucp-insecure-tls

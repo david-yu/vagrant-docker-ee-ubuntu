@@ -1,11 +1,11 @@
 #!/bin/bash
 
-< /dev/urandom tr -dc a-f0-9 | head -c${1:-12} > /vagrant/dtr-replica-id
-ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/dtr-node1-ipaddr
-export UCP_IPADDR=$(cat /vagrant/ucp-node1-ipaddr)
-export UCP_USERNAME=$(cat /vagrant/ucp_username)
-export UCP_PASSWORD=$(cat /vagrant/ucp_password)
-export DTR_REPLICA_ID=$(cat /vagrant/dtr-replica-id)
+< /dev/urandom tr -dc a-f0-9 | head -c${1:-12} > /vagrant/env/dtr-replica-id
+ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/env/dtr-node1-ipaddr
+export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
+export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
+export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
+export DTR_REPLICA_ID=$(cat /vagrant/env/dtr-replica-id)
 export DTR_VERSION=2.3.3
 
 # Sleep 35 seconds to wait for node registration
