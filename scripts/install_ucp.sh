@@ -30,7 +30,7 @@ if [ -f /vagrant/env/k8s ]; then
   # Collect the current config with `docker config inspect`
   docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
   # Change default node orchestrator to k8s
-  sed -i '/default_node_orchestrator =/ s/= .*/= kubernetes/' ucp-config.toml
+  sed -i '/default_node_orchestrator =/ s/= .*/= "kubernetes"/' ucp-config.toml
   # NEXT_CONFIG_NAME will be the name of the new UCP configuration
   NEXT_CONFIG_NAME=${CURRENT_CONFIG_NAME%%-*}-$((${CURRENT_CONFIG_NAME##*-}+1))
   # Create the new swarm configuration from the file ucp-config.toml
