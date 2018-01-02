@@ -30,6 +30,13 @@ DNS entries for landrush:
 - `visualizer.local`: 172.28.128.31
 - `gitlab.local`: 172.28.128.31
 
+Organization of repo:
+
+- `env` - where environment variables are stored and read for bringing up EE platform
+- `files` - configuration files for load balancers, etc
+- `scripts` - scripts executed by VagrantFile
+- `Makefile` - file used to create simple commands via `make` which invoke the Vagrant CLI 
+
 ## Download vagrant from Vagrant website
 
 ```

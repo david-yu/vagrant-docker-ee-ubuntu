@@ -1,66 +1,328 @@
+# Example UCP configuration file
 [auth]
-  default_new_user_role = "restrictedcontrol"
+
+  # The name of the auth backend to use, either "managed" or "ldap".
   backend = "managed"
+
+  # The role that new users will get for their private collections. Can be
+  # "admin", "viewonly", "scheduler", "restrictedcontrol", or "fullcontrol".
+  default_new_user_role="restrictedcontrol"
+
   [auth.sessions]
+    # Specifies the initial lifetime (in minutes) of a session from the moment
+    # it is generated.
     lifetime_minutes = 4320
+
+    # Indicates a period of time (in minutes) before the expiration of a session
+    # where, if used, a session will be extended by the current configured lifetime
+    # from then, a zero value disables session extension.
     renewal_threshold_minutes = 1440
-    per_user_limit = 0
+
+    # Indicates the maximum number of sessions that any user can have active at any
+    # given time. If creating a new session would put a user over this limit then
+    # the least recently used session will be deleted. A value of zero disables
+    # limiting the number of sessions that users may have.
+    per_user_limit = 5
+
+
   [auth.ldap]
-    sync_schedule = ""
-    jit_user_provisioning = true
-    server_url = ""
+
+    # The URL of the LDAP server.
+    server_url = "ldap://directory.example.com"
+
+    # Set to true if the LDAP server does not support the Simple Paged Results
+    # control extension (RFC 2696).
     no_simple_pagination = false
-    start_tls = false
-    root_certs = ""
+
+    # Whether to use StartTLS to secure the connection to the server, ignored if
+    # server URL scheme is 'ldaps://'.
+    start_tls = true
+
+    # A root certificate PEM bundle to use when establishing a TLS connection to
+    # the server.
+    root_certs = """
+    -----BEGIN CERTIFICATE-----
+    MIIFEjCCAvygAwIBAgIIOaFXTz/3NbswCwYJKoZIhvcNAQENMBcxFTATBgNVBAMT
+    ...
+    cNh+xk+gyKxBoirws/9HeYJr0E+SBgVX2RepniOveCFZjLhuwM3vKEAtkFTSNCRx
+    ZoP56+dK
+    -----END CERTIFICATE-----"""
+
+    # Whether to skip verifying of the server's certificate when establishing a TLS
+    # connection, not recommended unless testing on a secure network.
     tls_skip_verify = false
-    reader_dn = ""
-    reader_password = ""
+
+    # The distinguished name the system will use to bind to the LDAP server when
+    # performing searches.
+    reader_dn = "cn=read-only,dc=example,dc=com"
+
+    # The password that the system will use to bind to the LDAP server when
+    # performing searches.
+    reader_password = "ld4pR34d0nlyP4$$w0rd"
+
+    # The scheduled time for automatic LDAP sync jobs. Can be specified in CRON
+    # table entry format (with a seconds field always set to 0):
+    #
+    #   0 (minutes) (hours) (day of month) (month of year) (day of week, optional)
+    #
+    # Can also be specified as a predefined scheduling definition: '@hourly',
+    # '@daily', or '@weekly'.
+    # Default is '@hourly' if empty or omitted.
+    sync_schedule = "@daily"
+
+    # Whether to only create user accounts upon first login (recommended).
+    jit_user_provisioning = true
+
+
+    # A list of additional LDAP domains (and corresponding server configs) from
+    # which to sync users and team members. This is an advanced feature which
+    # most environments do not need.
+    [[auth.ldap.additional_domains]]
+
+      # The root domain component of this server, e.g., dc=example,dc=com. A
+      # longest-suffix match of the base DN for LDAP searches is used to select which
+      # LDAP server to use for search requests. If no matching domain is found, the
+      # default LDAP server config is used.
+      domain = "dc=eu,dc=example,dc=com"
+
+      # The URL of the LDAP server for this additional domain.
+      server_url = "ldaps://directory.eu.example.com"
+
+      # Set to true if the LDAP server for this additional domain does not support
+      # the Simple Paged Results control extension (RFC 2696).
+      no_simple_pagination = false
+
+      # Whether to use StartTLS to secure the connection to the server for this
+      # additional domain, ignored if server URL scheme is 'ldaps://'.
+      start_tls = false
+
+      # A root certificate PEM bundle to use when establishing a TLS connection to
+      # the server for this additional domain.
+      root_certs = ""
+
+      # Whether to skip verifying of the additional domain server's certificate when
+      # establishing a TLS connection, not recommended unless testing on a secure
+      # network.
+      tls_skip_verify = true
+
+      # The distinguished name the system will use to bind to the LDAP server when
+      # performing searches under this additional domain.
+      reader_dn = "cn=read-only,dc=eu,dc=example,dc=com"
+
+      # The password that the system will use to bind to the LDAP server when
+      # performing searches under this additional domain.
+      reader_password = "3ur0p34nLd4pR34d0nlyP4$$w0rd"
+
+
+    # One or more settings for syncing users.
+    [[auth.ldap.user_search_configs]]
+
+      # The distinguished name of the element from which the LDAP server will search
+      # for users
+      base_dn = "ou=people,dc=example,dc=com"
+
+      # Whether to search for users in the entire subtree of the base DN or to only
+      # search one level under the base DN (if false).
+      scope_subtree = false
+
+      # The name of the attribute of the LDAP user element which should be selected
+      # as the username.
+      username_attr = "uid"
+
+      # The name of the attribute of the LDAP user element which should be selected
+      # as the full name of the user.
+      full_name_attr = "cn"
+
+      # The LDAP search filter used to select user elements, may be left blank.
+      filter = "(objectClass=*)"
+
+      # Whether to additionally filter users to those who are direct members of a
+      # group.
+      match_group = true
+
+      # The distinguished name of the LDAP group. Required if matchGroup is true,
+      # ignored otherwise.
+      match_group_dn = "cn=ddc-users,ou=groups,dc=example,dc=com"
+
+      # The name of the LDAP group entry attribute which corresponds to distinguished
+      # names of members. Required if matchGroup is true, ignored otherwise.
+      match_group_member_attr = "member"
+
+      # Whether to iterate through the group members and perform a lookup for each
+      # one separately to get all of the user attributes, instead of searching users
+      # first then apply the group selection filter. Ignored if matchGroup is false.
+      match_group_iterate = false
+
+    # Settings for syncing system admin users.
     [auth.ldap.admin_sync_opts]
-      enable_sync = false
-      select_group_members = false
-      group_dn = ""
-      group_member_attr = ""
-      search_base_dn = ""
+
+      # Whether to enable syncing admins. If false, all other fields are ignored.
+      enable_sync = true
+
+      # Whether to sync using a group DN and member attribute selection or to use a
+      # search filter (if false).
+      select_group_members = true
+
+      # The distinguished name of the LDAP group. Required if selectGroupMembers is
+      # true, ignored otherwise.
+      group_dn = "cn=ddc-admins,ou=groups,dc=example,dc=com"
+
+      # The name of the LDAP group entry attribute which corresponds to distinguished
+      # names of members. Required if selectGroupMembers is true, ignored otherwise.
+      group_member_attr = "member"
+
+      # The distinguished name of the element from which the LDAP server will search
+      # for users. Required if selectGroupMembers is false, ignored otherwise.
+      search_base_dn = "ou=people,dc=example,dc=com"
+
+      # Whether to search for users in the entire subtree of the base DN or to only
+      # search one level under the base DN (if false). Required if selectGroupMembers
+      # is false, ignored otherwise.
       search_scope_subtree = false
-      search_filter = ""
+
+      # The LDAP search filter used to select users if selectGroupMembers is false,
+      # may be left blank.
+      search_filter = "(memberOf=cn=ddc-admins,ou=groups,dc=example,dc=com)"
+
+
+[[registries]]
+  # The address used to connect to the DTR instance tied to this UCP cluster
+  host_address = ""
+
+  # The DTR instance's OpenID Connect Client ID, as registered with our auth provider.
+  service_id = ""
+
+  # The root CA bundle for the DTR instance (if using a custom CA).
+  ca_bundle = ""
 
 [scheduling_configuration]
+
+  # Allow admins to schedule containers on managers
+  # Set to true to allow admins to schedule on manager
   enable_admin_ucp_scheduling = true
-  default_node_orchestrator = kubernetes
+
+  # The type of orchestrator to use for new nodes that are joined to the
+  # cluster. Can be either "swarm" or "kubernetes".
+  default_node_orchestrator = "kubernetes"
+
 
 [tracking_configuration]
+
+  # Disable analytics of usage information
+  # Set to true to disable analytics
   disable_usageinfo = false
+
+  # Disable analytics of API call information
+  # Set to true to disable analytics
   disable_tracking = false
+
+  # Anonymize analytic data
+  # Set to true to hide your license ID
   anonymize_tracking = false
-  cluster_label = ""
+
+  # Set an optional label to be included with analytics that are sent to
+  # Docker indicating whether this UCP cluster is a production cluster or a
+  # development cluster. This allows Docker to analyze the data in UCP
+  # analytics more accurately.
+  cluster_label = "prod"
+
 
 [trust_configuration]
+
+  # Require images be signed by content trust
   require_content_trust = false
 
+  # Specify users or teams which must sign images
+  require_signature_from = ["team1", "team2"]
+
+
 [log_configuration]
+
+  # Specify the protocol to use for remote logging (default tcp)
   protocol = ""
+
+  # Specify a remote syslog server to send UCP controller logs to
+  # if omitted, controller logs will be sent through the default
+  # docker daemon logging driver from the ucp-controller container
   host = ""
-  level = "INFO"
+
+  # Set the logging level for UCP components - uses syslog levels
+  level = "DEBUG"
+
 
 [license_configuration]
+
+  # Enable attempted automatic license renewal when the license nears expiration
+  # If disabled, you must manually upload renewed licesnse after expiration.
   auto_refresh = true
 
+
 [cluster_config]
+
+  # Configures the port the ucp-controller listens to
   controller_port = 443
+
+  # Configures the port the ucp-swarm-manager listens to
   swarm_port = 2376
+
+  # Configures Swarm scheduler strategy for container scheduling
+  # This does not affect swarm-mode services
   swarm_strategy = "spread"
+
+  # Configures DNS settings for the UCP components
   dns = []
   dns_opt = []
   dns_search = []
+
+  # Turn on specialized debugging endpoints for profiling UCP performance
+  profiling_enabled = false
+
+  # Tune the KV store timeout and snapshot settings
   kv_timeout = 5000
   kv_snapshot_count = 20000
-  profiling_enabled = false
-  external_service_lb = ""
-  metrics_retention_time = ""
-  metrics_target_heap_size = "256M"
-  metrics_scrape_interval = "1m"
-  metrics_disk_usage_interval = "2h"
-  rethinkdb_cache_size = "512MB"
-  cni_installer_url = ""
-  min_tls_version = ""
 
+  # Specify an optional external LB for default links to services with expose ports in the UI
+  external_service_lb = ""
+
+  # Specify the URL of a kubernetes YAML file to be used for installing a CNI
+  # plugin. Only applies during initial installation. If empty, the default CNI
+  # plugin will be used
+  cni_installer_url = ""
+
+  # Adjust the metrics retention time
+  metrics_retention_time = ""
+
+  # Adjust the amount of memory the metrics server will use.
+  metrics_target_heap_size = "512M"
+
+  # Set the interval for how frequently managers gather metrics from nodes in the cluster
+  metrics_scrape_interval = "1m"
+
+  # Set the interval for how frequently storage metrics are gathered
+  # this operation can be expensive when large volumes are present
+  metrics_disk_usage_interval = "2h"
+
+  # Set the size of the cache used by UCP's RethinkDB servers. The installed
+  # default is 512MB, but leaving this field empty or specifying the special
+  # value "auto" will instruct RethinkDB to determine a cache size
+  # automatically (about half of currently available memory) which ensures a
+  # reliable operation in most scenarios, but the cache size can be tuned
+  # manually to accommodate increased memory usage by other processes or to
+  # maximize query performance. A larger cache improves the database’s
+  # performance, but you must consider other sources of memory consumption to
+  # avoid out of memory conditions.
+  # https://www.rethinkdb.com/docs/memory-usage/#cache-size
+  rethinkdb_cache_size = "512MB"
+
+  # Set the minimum TLS version for the controller to serve. Valid options are
+  # tlsv1, tlsv1.0, tlsv1.1, and tlsv1.2. Empty string defaults to TLS version
+  # 1.0. SSL version 3 is NOT supported
+  min_tls_version = "tlsv1.2"
+
+  # ADVANCED: Set any additional flags on the Kubernetes system components that
+  # you may require. You must ensure that any custom flags do not conflict with
+  # configuration options already set by UCP.
+  custom_kube_api_server_flags = ["--event-ttl=1h0m0s", "--service-node-port-range=30000-32767"]
+  custom_kube_controller_manager_flags = ["--service-sync-period=5m0s"]
+  custom_kubelet_flags = ["--http-check-frequency=20s"]
+  custom_kube_scheduler_flags = ["--algorithm-provider=DefaultProvider"]
