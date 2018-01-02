@@ -39,16 +39,9 @@ if [ -f /vagrant/env/k8s ]; then
   # and apply the new configuration to the `ucp-agent` service.
   docker service update -d --config-rm $CURRENT_CONFIG_NAME --config-add source=$NEXT_CONFIG_NAME,target=/etc/ucp/ucp.toml ucp-agent
   # Update tasks to run on Swarm instead of K8S
-  services=$(docker service ls -q)
-  for service in $services; do
-    if docker service inspect $service --format '{{.Spec.TaskTemplate.Placement.Constraints}}' | grep -q -v 'node.labels.com.docker.ucp.orchestrator.swarm=true'; then
-      name=$(docker service inspect $service --format '{{.Spec.Name}}')
-      if [ $name = "ucp-agent" ] || [ $name = "ucp-agent-win" ] ||  [ $name = "ucp-agent-s390x" ]; then
-        continue
-      fi
-      echo "Updating service $name (ID: $service)"
-      docker service update --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true $service
-    fi
+  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock
+  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-proxy
+  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-extension
 done
   # Delete K8s config file
   rm -f /vagrant/env/k8s
