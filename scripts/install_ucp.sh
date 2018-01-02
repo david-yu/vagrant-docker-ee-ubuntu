@@ -42,7 +42,6 @@ if [ -f /vagrant/env/k8s ]; then
   docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock
   docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-proxy
   docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-extension
-done
   # Delete K8s config file
   rm -f /vagrant/env/k8s
 fi

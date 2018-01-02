@@ -7,7 +7,7 @@ help:    ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 start:
-	@vagrant up ucp dtr worker-node1 worker-node2
+	@vagrant up ucp worker-node1 worker-node2
 
 k8s:
 	echo 'true' > env/k8s
