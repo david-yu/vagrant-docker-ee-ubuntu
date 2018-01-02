@@ -3,7 +3,13 @@ Vagrant Virtualbox setup for Docker EE 2.0 on Ubuntu Xenial 16.04
 
 ## Overview
 
-This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs Docker EE, UCP, and DTR with embedded DNS. This can be used as a demo environment on your local machine, when internet access is not present.
+This vagrant file is provided strictly for demonstration purposes to help setup a cluster environment that installs Docker EE, UCP, and DTR with embedded DNS. This can be used as a demo environment on your local machine, when internet access is not present. The organization of this repo is as follows:
+
+- `env` - where environment variables are stored and read for bringing up EE platform
+- `files` - configuration files for load balancers, etc
+- `scripts` - scripts executed by VagrantFile
+- `Makefile` - file used to create simple commands via `make` which invoke the Vagrant CLI
+
 
 By default, after running `make start` the following will be provisioned and installed:
 - UCP node - UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker / {password in `ucp_password` file})
@@ -29,13 +35,6 @@ DNS entries for landrush:
 - `nodeapp.local`: 172.28.128.31
 - `visualizer.local`: 172.28.128.31
 - `gitlab.local`: 172.28.128.31
-
-Organization of repo:
-
-- `env` - where environment variables are stored and read for bringing up EE platform
-- `files` - configuration files for load balancers, etc
-- `scripts` - scripts executed by VagrantFile
-- `Makefile` - file used to create simple commands via `make` which invoke the Vagrant CLI 
 
 ## Download vagrant from Vagrant website
 
