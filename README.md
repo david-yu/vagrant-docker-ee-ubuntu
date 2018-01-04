@@ -45,17 +45,17 @@ DNS entries for landrush:
 
 ## Getting Started
 
-1. ### Download vagrant from Vagrant website
+1. #### Download vagrant from Vagrant website
 ```
 https://www.vagrantup.com/downloads.html
 ```
 
-2. ### Install Virtual Box
+2. #### Install Virtual Box
 ```
 https://www.virtualbox.org/wiki/Downloads
 ```
 
-3. ### Create files in the `/env` folder to store environment variables with custom values for use by Vagrant
+3. #### Create files in the `/env` folder to store environment variables with custom values for use by Vagrant
 ```
 ee_url
 ucp_username
@@ -66,19 +66,19 @@ For the `ee_url` file make sure the format of the ee_url is like the following
 https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx
 ```
 
-4. ### Provide Docker EE license in `/env` folder (will fail if not provided)
+4. #### Provide Docker EE license in `/env` folder (will fail if not provided)
 ```
 docker_subscription.lic
 ```
 
-5. ### Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
+5. #### Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
 ```
 vagrant plugin install landrush
 vagrant plugin install vagrant-hostsupdater
 vagrant plugin install vagrant-multiprovider-snap
 ```
 
-6. ### Bring up nodes
+6. #### Bring up nodes
 If you are thinking of customizing the start up of the cluster (i.e. no DTR, HA UCP, etc) modify the `Makefile` to describe the `start`, `stop`, and `destroy` targets to manage certain nodes, if you only need a UCP manager node you can just edit the file to have the following entry for the `start` target.
 ```
 start:
@@ -99,31 +99,30 @@ After setting up a swarm or kubernetes cluster with the previous commands, you c
 ```
 make dtr
 ```
-7. ###  Install Gitlab CE and Jenkins (Optional)
+7. ####  Install Gitlab CE and Jenkins (Optional)
 	1. If you want to bring up a Gitlab CE node you can run the following command to bring up a VM that runs Gitlab CE without Docker
-		```
-		make gitlab
-		```
+	```
+	make gitlab
+	```
 	Then go login as `root` and create an Access Token by to going to Settings -> Access Tokens and export the token as an environment variables.
-		```
-		EXPORT GITLAB_TOKEN=<insert token>
-		```
+	```
+	EXPORT GITLAB_TOKEN=<insert token>
+	```
 	2. Run the following command to configure Gitlab with a new project and webhooks using the GITLAB_TOKEN
-		```
-		make config-gitlab
-		```
+	```
+	make config-gitlab
+	```
 	3. After bringing up a Gitlab CE node you can then provision a Swarm node to run Jenkins on Docker EE.
-		```
-		make jenkins
-		```
+	```
+	make jenkins
+	```
 
-
-7. ### SSH into nodes
+7. #### SSH into nodes
 You can SSH directly into the nodes by specifying the names of each Vagrant VM
 ```
 vagrant ssh ucp
 ```
-8. ### Snapshot nodes
+8. #### Snapshot nodes
 Take initial snapshot of nodes
 ```
 make snap
@@ -132,11 +131,11 @@ Restore initial snapshot
 ```
 make rollback
 ```
-9. ### Stop nodes
+9. #### Stop nodes
 ```
 make stop
 ```
-10. ### Destroy nodes
+10. #### Destroy nodes
 ```
 make destroy
 ```
