@@ -199,10 +199,10 @@ Vagrant.configure(2) do |config|
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
-        sudo cp /vagrant/scripts/gitlab.sh .
-        sudo cp /vagrant/scripts/gitlab_api.sh .
-        sudo chmod +x gitlab.sh
-        sudo chmod +x gitlab_api.sh
+        sudo cp /vagrant/scripts/install_gitlab.sh .
+        sudo cp /vagrant/scripts/configure_gitlab.sh .
+        sudo chmod +x install_gitlab.sh
+        sudo chmod +x configure_gitlab.sh
         sleep 5
         ./gitlab.sh
      SHELL
