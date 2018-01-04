@@ -104,14 +104,17 @@ make dtr
 	```
 	make gitlab
 	```
+
 	Then go login as `root` and create an Access Token by to going to Settings -> Access Tokens and export the token as an environment variables.
 	```
 	EXPORT GITLAB_TOKEN=<insert token>
 	```
+
 	2. Run the following command to configure Gitlab with a new project and webhooks using the GITLAB_TOKEN
 	```
 	make config-gitlab
 	```
+
 	3. After bringing up a Gitlab CE node you can then provision a Swarm node to run Jenkins on Docker EE.
 	```
 	make jenkins
