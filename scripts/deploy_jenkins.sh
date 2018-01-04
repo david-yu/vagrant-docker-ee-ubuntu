@@ -19,4 +19,9 @@ export DOCKER_HOST=tcp://${UCP_IPADDR}:443
 docker network create -d overlay jenkins
 
 # Create Jenkins Service
-docker service create -d --replicas 1 --mount type=volume,source=jenkins-volume,destination=/var/jenkins_home --network jenkins --label com.docker.lb.hosts=jenkins.local --label com.docker.lb.port=8080 --constraint 'node.hostname==jenkins-node' --name jenkins jenkins
+docker service create -d --replicas 1 \
+  --mount type=volume,source=jenkins-volume,destination=/var/jenkins_home \
+  --network jenkins \
+  --label com.docker.lb.hosts=jenkins.local \
+  --env JENKINS_OPTS=--argumentsRealm.passwd.$$ADMIN_USER=jenkins,--argumentsRealm.roles.$$ADMIN_USER=leroy \
+  --label com.docker.lb.port=8080 --constraint 'node.hostname==jenkins-node' --name jenkins jenkins

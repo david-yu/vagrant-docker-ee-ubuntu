@@ -19,6 +19,9 @@ dtr:
 gitlab:
 	@vagrant up gitlab
 
+config-gitlab:
+	./scripts/configure_gitlab.sh
+
 rm-gitlab:
 	@vagrant destroy gitlab
 
