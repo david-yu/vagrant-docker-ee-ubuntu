@@ -18,10 +18,16 @@ export DOCKER_HOST=tcp://${UCP_IPADDR}:443
 # Create Overlay Network
 docker network create -d overlay jenkins
 
-# Create Jenkins Service
-docker service create -d --replicas 1 \
-  --mount type=volume,source=jenkins-volume,destination=/var/jenkins_home \
-  --network jenkins \
+docker service create -d \
+  --replicas 1 \
+  --constraint 'node.hostname == jenkins-node' \
+  --env DTR_URL=dtr.demo.dckr.org \
+  --env DEMO_MASTER=ucp.local \
+  --env DOMAIN_NAME=local \
+  --env GITHUB_USERNAME=yongshin \
+  --mount type=volume,source=jenkinstest-data,destination=/var/lib/jenkins,readonly=false \
   --label com.docker.lb.hosts=jenkins.local \
-  --env JENKINS_OPTS=--argumentsRealm.passwd.$$ADMIN_USER=jenkins,--argumentsRealm.roles.$$ADMIN_USER=leroy \
-  --label com.docker.lb.port=8080 --constraint 'node.hostname==jenkins-node' --name jenkins jenkins
+  --label com.docker.lb.port=8080 \
+  --network jenkins \
+  --name jenkins \
+  dockersolutions/jenkins:latest

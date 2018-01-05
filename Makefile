@@ -40,6 +40,9 @@ destroy-workers:
 stop:
 	@vagrant halt ucp dtr worker-node1 worker-node2 jenkins
 
+status:
+	@vagrant status
+
 snap: ## snapshot all vms
 	./scripts/snapshot.sh
 
