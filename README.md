@@ -15,8 +15,8 @@ This vagrant file is provided strictly for demonstration purposes to help setup 
 ### Vagrant VMs provisioned
 
 By default, after running `make start` the following will be provisioned and installed:
-- UCP node - UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker / {password in `ucp_password` file})
-- DTR node - DTR will be accessible from `https:\\dtr.local` resolved through DNS
+- UCP node - UCP will be accessible from `https:\\ucp.local` resolved through DNS (login: docker / {password in `ucp_password` file}), provisioned with 2.5 GB RAM and 2 CPU
+- DTR node - DTR will be accessible from `https:\\dtr.local` resolved through DNS, provisioned with 2 GB RAM and 2 CPU
 - 2 worker nodes (`worker-node1` and `worker-node2`) - provisioned with 1GB RAM and 1 CPU each
 
 ### Static ips set by default
