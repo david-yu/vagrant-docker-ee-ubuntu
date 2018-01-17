@@ -14,14 +14,14 @@ ucp:
 
 k8s:
 	@vagrant up ucp
-	./scripts/configure_ucp.sh
+	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh' 
 	echo 'true' > env/k8s
 	@vagrant up worker-node1 worker-node2
 
 mixed:
 	@vagrant up ucp worker-node1
 	echo 'true' > env/k8s
-	./scripts/configure_ucp.sh
+	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
 	@vagrant up worker-node2
 
 dtr:
