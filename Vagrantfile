@@ -35,14 +35,17 @@ Vagrant.configure(2) do |config|
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo cp /vagrant/scripts/install_ucp.sh .
+        sudo cp /vagrant/scripts/configure_ucp.sh .
         sudo cp /vagrant/scripts/create_tokens.sh .
         sudo cp /vagrant/scripts/visualizer.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x install_ucp.sh
+        sudo chmod +x configure_ucp.sh
         sudo chmod +x create_tokens.sh
         sudo chmod +x visualizer.sh
         ./install_ee.sh
         ./install_ucp.sh
+        ./configure_ucp.sh
         ./create_tokens.sh
         # ./visualizer.sh
      SHELL

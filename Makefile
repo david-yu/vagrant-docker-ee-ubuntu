@@ -13,8 +13,16 @@ ucp:
 	@vagrant up ucp
 
 k8s:
+	@vagrant up ucp
+	./scripts/configure_ucp.sh
 	echo 'true' > env/k8s
-	@vagrant up ucp worker-node1 worker-node2
+	@vagrant up worker-node1 worker-node2
+
+mixed:
+	@vagrant up ucp worker-node1
+	echo 'true' > env/k8s
+	./scripts/configure_ucp.sh
+	@vagrant up worker-node2
 
 dtr:
 	@vagrant up dtr
