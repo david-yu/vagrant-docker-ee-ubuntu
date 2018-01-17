@@ -3,14 +3,18 @@ export UCP_VERSION=3.0.0-beta2
 
 ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/env/ucp-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
-export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
+
+if [ ! -f /vagrant/files/ucp_password ]; then
+  echo 'dockeradmin' > /vagrant/env/ucp_password
+fi
+export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 # Install UCP
 if [[ $(cat /vagrant/files/docker_subscription.lic) ]]; then
-  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local --license $(cat /vagrant/files/docker_subscription.lic)
+  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local --license $(cat /vagrant/files/docker_subscription.lic)
 else
-  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local
+  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local
 fi
 
 # Gather Swarm Tokens and UCP cluster id
@@ -38,10 +42,6 @@ if [ -f /vagrant/env/k8s ]; then
   # Use the `docker service update` command to remove the current configuration
   # and apply the new configuration to the `ucp-agent` service.
   docker service update -d --config-rm $CURRENT_CONFIG_NAME --config-add source=$NEXT_CONFIG_NAME,target=/etc/ucp/ucp.toml ucp-agent
-  # Update tasks to run on Swarm instead of K8S
-  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock
-  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-proxy
-  docker service update -d --constraint-add node.labels.com.docker.ucp.orchestrator.swarm==true ucp-interlock-extension
   # Delete K8s config file
   rm -f /vagrant/env/k8s
 fi
