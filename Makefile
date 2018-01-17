@@ -29,6 +29,8 @@ workers:
 	@vagrant up worker-node1 worker-node2
 
 dtr:
+	# Configure orchestrator to Swarm
+	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
 	@vagrant up dtr
 
 gitlab:
