@@ -1,4 +1,5 @@
 export UCP_VERSION=3.0.0-beta2
+export UCP_ID=$(cat /vagrant/env/ucp-id)
 
 # Enable k8s by default
 if [ -f /vagrant/env/k8s ]; then

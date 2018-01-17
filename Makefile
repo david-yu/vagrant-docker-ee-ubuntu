@@ -14,7 +14,7 @@ ucp:
 
 k8s:
 	@vagrant up ucp
-	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh' 
+	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
 	echo 'true' > env/k8s
 	@vagrant up worker-node1 worker-node2
 
@@ -23,6 +23,9 @@ mixed:
 	echo 'true' > env/k8s
 	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
 	@vagrant up worker-node2
+
+workers:
+	@vagrant up worker-node1 worker-node2
 
 dtr:
 	@vagrant up dtr
@@ -41,9 +44,6 @@ jenkins:
 
 rm-jenkins:
 	@vagrant destroy -f jenkins
-
-workers:
-	@vagrant up worker-node1 worker-node2
 
 destroy-workers:
 	@vagrant destroy -f worker-node1 worker-node2
