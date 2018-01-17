@@ -92,9 +92,13 @@ Then you can run from the CLI. Make default make start will bring up a ucp manag
 ```
 make start
 ```
-If you want to bring up a ucp manager node with two kubernetes worker nodes you can run the following command.
+If you want to bring up a ucp manager node with two kubernetes worker nodes you can run the following command:
 ```
 make k8s
+```
+If you want to bring up a ucp manager node with one kubernetes worker node and one swarm worker node you can run the following command:
+```
+make mixed
 ```
 After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR and provision a node and install DTR.
 ```
