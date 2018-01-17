@@ -20,6 +20,7 @@ Vagrant.configure(2) do |config|
       ubuntu_ucp_node1.landrush.tld = 'local'
       ubuntu_ucp_node1.vm.hostname = "ucp.local"
       ubuntu_ucp_node1.landrush.enabled = true
+      ubuntu_ucp_node1.landrush.host 'dtr.local', '172.28.128.34'
       ubuntu_ucp_node1.landrush.host 'wordpress.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'jenkins.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'nodeapp.local', '172.28.128.35'
