@@ -11,6 +11,8 @@ export DTR_VERSION=2.5.0-beta2
 # Sleep 35 seconds to wait for node registration
 sleep 60
 
+# Turn off HRM temporarily
+
 # Install DTR
 sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username "${UCP_USERNAME}" --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls'
 # Run backup of DTR
