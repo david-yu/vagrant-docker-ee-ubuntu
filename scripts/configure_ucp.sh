@@ -24,6 +24,3 @@ docker config create $NEXT_CONFIG_NAME  ucp-config.toml
 # Use the `docker service update` command to remove the current configuration
 # and apply the new configuration to the `ucp-agent` service.
 docker service update -d --config-rm $CURRENT_CONFIG_NAME --config-add source=$NEXT_CONFIG_NAME,target=/etc/ucp/ucp.toml ucp-agent
-
-# Run Backup
-docker run --rm -i --log-driver none --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} backup --id ${UCP_ID} --root-ca-only --passphrase "secret" > /vagrant/backup.tar

@@ -4,6 +4,7 @@ export UCP_VERSION=3.0.0-beta2
 ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/env/ucp-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
 export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
+export UCP_FQDN=ucp.local
 
 if [ ! -f /vagrant/files/ucp_password ]; then
   echo 'dockeradmin' > /vagrant/env/ucp_password
@@ -12,9 +13,9 @@ export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 # Install UCP
 if [[ $(cat /vagrant/files/docker_subscription.lic) ]]; then
-  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local --license $(cat /vagrant/files/docker_subscription.lic)
+  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ${UCP_FQDN} --license $(cat /vagrant/files/docker_subscription.lic)
 else
-  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ucp.local
+  docker run --rm --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:${UCP_VERSION} install --force-minimums --host-address ${UCP_IPADDR} --admin-username ${UCP_USERNAME} --admin-password ${UCP_PASSWORD} --san ${UCP_FQDN}
 fi
 
 # Gather Swarm Tokens and UCP cluster id
