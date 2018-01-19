@@ -11,4 +11,4 @@ docker container run --rm -it \
 
 docker container run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp:${UCP_VERSION} restore --passphrase "secret" < /tmp/backup.tar
+  docker/ucp:${UCP_VERSION} restore --passphrase "secret" < /vagrant/ucp_backup.tar
