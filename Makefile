@@ -20,7 +20,6 @@ k8s:
 
 mixed:
 	@vagrant up ucp worker-node1
-	sleep 30
 	echo 'true' > env/k8s
 	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
 	@vagrant up worker-node2
