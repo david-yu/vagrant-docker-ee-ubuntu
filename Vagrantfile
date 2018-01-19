@@ -111,6 +111,7 @@ Vagrant.configure(2) do |config|
       ubuntu_dtr_node1.landrush.tld = 'local'
       ubuntu_dtr_node1.vm.hostname = "dtr.local"
       ubuntu_dtr_node1.landrush.enabled = true
+      ubuntu_dtr_node1.landrush.host 'ucp.local', '172.28.128.31'
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", "2048"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
