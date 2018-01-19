@@ -39,12 +39,14 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/configure_ucp.sh .
         sudo cp /vagrant/scripts/create_tokens.sh .
         sudo cp /vagrant/scripts/visualizer.sh .
+        sudo cp /vagrant/scripts/backup_ucp.sh .
         sudo cp /vagrant/scripts/restore_ucp.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x install_ucp.sh
         sudo chmod +x configure_ucp.sh
         sudo chmod +x create_tokens.sh
         sudo chmod +x visualizer.sh
+        sudo chmod +x backup_ucp.sh
         sudo chmod +x restore_ucp.sh
         ./install_ee.sh
         ./install_ucp.sh
@@ -126,11 +128,13 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/install_dtr.sh .
         sudo cp /vagrant/scripts/prepopulate_dtr.sh .
         sudo cp /vagrant/scripts/backup_dtr.sh .
+        sudo cp /vagrant/scripts/restore_dtr.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
         sudo chmod +x install_dtr.sh
         sudo chmod +x prepopulate_dtr.sh
         sudo chmod +x backup_dtr.sh
+        sudo chmod +x restore_dtr.sh
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
