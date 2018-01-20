@@ -13,6 +13,6 @@ docker run --rm -it docker/dtr:${DTR_VERSION} destroy \
 
 cp /vagrant/dtr_backup.tar .
 
-docker run --rm docker/dtr:${DTR_VERSION} restore --ucp-url ${UCP-IPADDR} --ucp-username docker \
-  --ucp-password dockeradmin --dtr-external-url ${DTR_FQDN} --ucp-node dtr-node1 \
-  --ucp-insecure-tls  < dtr_backup.tar
+docker run --rm -i docker/dtr:${DTR_VERSION} restore --ucp-url ${UCP_IPADDR} --ucp-username docker \
+  --ucp-password dockeradmin --dtr-external-url ${DTR_FQDN} --ucp-node dtr \
+  --replica-id ${DTR_REPLICA_ID} --ucp-insecure-tls  < dtr_backup.tar
