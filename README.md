@@ -110,7 +110,7 @@ make dtr
 	make gitlab
 	```
 
-	Then go login as `root` and create an Access Token by to going to Settings -> Access Tokens and export the token as an environment variables.
+	Then go login as `root`/`5iveL!fe` and create an Access Token by to going to Settings -> Access Tokens and export the token as an environment variables.
 	```
 	EXPORT GITLAB_TOKEN=<insert token>
 	```
