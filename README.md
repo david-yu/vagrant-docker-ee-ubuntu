@@ -21,7 +21,7 @@ By default, after running `make start` the following will be provisioned and ins
 - Gitlab CE node (Optional) - Gitlab will be accessible from `https:\\gitlab.local` resolved through DNS, provisioned with 2.5 GB RAM and 2 CPU
 - Jenkins worker node (Optional) - worker node that runs Jenkins container, provisioned with 1GB RAM and 2 CPU each
 
-### Static ips set by default
+### Static IPs set by default
 
 This template will also setup the VMs with static ip addresses as follows (if IP addresses are already in use, change them inside of the Vagrantfile):
 - `ucp` (UCP manager node): 172.28.128.31
@@ -31,7 +31,7 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 - `worker-node1` (Worker node): 172.28.128.35
 - `worker-node2` (Worker node): 172.28.128.36
 - `gitlab` (Gitlab node): 172.28.128.37 - Optional
-- `haproxy` (HA Proxy node): 172.28.128.30 - Optional, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: admin / admin)
+- `haproxy` (HA Proxy node): 172.28.128.30 - Optional, HAProxy Stats will be accessible from `https:\\haproxy.local:9000` (login: `admin` / `admin`)
 - `jenkins` (Jenkins node): 172.28.128.38 - Optional
 
 ### DNS entries created for VMs

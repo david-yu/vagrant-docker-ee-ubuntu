@@ -8,13 +8,16 @@ export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/env/dtr-replica-id)
 export DTR_VERSION=2.5.0-beta3
 
-# Sleep 60 seconds to wait for node registration
-sleep 60
+# Sleep 70 seconds to wait for node registration
+sleep 70
 
 # Install DTR
 sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username "${UCP_USERNAME}" --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls'
 # Run backup of DTR
 sudo -E sh -c 'docker run --rm --log-driver none docker/dtr:${DTR_VERSION} backup --ucp-url https://"${UCP_IPADDR}" --existing-replica-id "${DTR_REPLICA_ID}" --ucp-username admin --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls > /tmp/backup.tar'
+
+# Sleep 30 seconds to wait for DTR to come back up
+sleep 30
 
 # Trust self-signed DTR CA
 sudo sh -c 'curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt'
