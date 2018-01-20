@@ -50,8 +50,8 @@ Vagrant.configure(2) do |config|
         sudo chmod +x restore_ucp.sh
         ./install_ee.sh
         ./install_ucp.sh
-        ./configure_ucp.sh
         ./create_tokens.sh
+        ./backup_ucp.sh
         # ./visualizer.sh
      SHELL
     end
