@@ -1,17 +1,18 @@
 #!/bin/bash
 
+export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
 export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
 export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export UCP_FQDN=ucp.local
 export DTR_FQDN=dtr.local
 export DTR_PASSWORD=$(cat /vagrant/env/ucp_password)
-export AUTH_TOKEN="$(curl -sk -d "{\"username\":\"$UCP_USERNAME\",\"password\":\"$UCP_PASSWORD\"}" "https://${UCP_FQDN}/auth/login" | jq -r .auth_token 2>/dev/null)"
+export AUTH_TOKEN="$(curl -sk -N -d "{\"username\":\"$UCP_USERNAME\",\"password\":\"$UCP_PASSWORD\"}" "https://${UCP_IPADDR}/auth/login" | jq -r .auth_token)"
 
 # create users
 createUser() {
 	USER_NAME=$1
   FULL_NAME=$2
-	curl -X POST "https://${UCP_FQDN}/accounts/" -H  "accept: application/json" \
+	curl -k -X POST "https://${UCP_FQDN}/accounts/" -H  "accept: application/json" \
 		-H "Authorization: Bearer ${AUTH_TOKEN}" \
 		-H "content-type: application/json" -d "{
 			\"isOrg\": false,
@@ -30,7 +31,7 @@ createUser chad 'Chad Metcalf'
 # create organizations
 createOrg() {
 	ORG_NAME=$1
-	curl -X POST "https://${UCP_FQDN}/accounts/" -H "accept: application/json" \
+	curl -k -X POST "https://${UCP_FQDN}/accounts/" -H "accept: application/json" \
 		-H "Authorization: Bearer ${AUTH_TOKEN}" -H "content-type: application/json" -d "{
 				\"isOrg\": true,
 				\"name\": \"${ORG_NAME}\"}"
@@ -42,13 +43,13 @@ createOrg infrastructure
 createRepo() {
     REPO_NAME=$1
     ORG_NAME=$2
-    curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
+    curl -k -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
       --user docker:dockeradmin -d "{
       \"name\": \"${REPO_NAME}\",
       \"shortDescription\": \"\",
       \"longDescription\": \"\",
       \"visibility\": \"public\"}" \
-      "https://${DTR_URL}/api/v0/repositories/${ORG_NAME}"
+      "https://${DTR_FQDN}/api/v0/repositories/${ORG_NAME}"
 }
 createRepo mongo engineering
 createRepo wordpress engineering
@@ -62,13 +63,13 @@ docker pull mariadb
 git clone https://github.com/yongshin/leroy-jenkins.git
 docker build -t leroy-jenkins /home/ubuntu/leroy-jenkins/
 # tag images
-docker tag mongo ${DTR_URL}/engineering/mongo:latest
-docker tag wordpress ${DTR_URL}/engineering/wordpress:latest
-docker tag mariadb ${DTR_URL}/engineering/mariadb:latest
-docker tag leroy-jenkins ${DTR_URL}/infrastructure/leroy-jenkins:latest
+docker tag mongo ${DTR_FQDN}/engineering/mongo:latest
+docker tag wordpress ${DTR_FQDN}/engineering/wordpress:latest
+docker tag mariadb ${DTR_FQDN}/engineering/mariadb:latest
+docker tag leroy-jenkins ${DTR_FQDN}/infrastructure/leroy-jenkins:latest
 # push signed images
 docker login dtr.local -u docker -p ${DTR_PASSWORD}
-docker push ${DTR_URL}/engineering/mongo:latest
-docker push ${DTR_URL}/engineering/wordpress:latest
-docker push ${DTR_URL}/engineering/mariadb:latest
-docker push ${DTR_URL}/infrastructure/leroy-jenkins:latest
+docker push ${DTR_FQDN}/engineering/mongo:latest
+docker push ${DTR_FQDN}/engineering/wordpress:latest
+docker push ${DTR_FQDN}/engineering/mariadb:latest
+docker push ${DTR_FQDN}/infrastructure/leroy-jenkins:latest

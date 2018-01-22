@@ -121,7 +121,7 @@ Vagrant.configure(2) do |config|
       end
       ubuntu_dtr_node1.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update
-        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate jq
         sudo ntpdate -s time.nist.gov
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo cp /vagrant/scripts/join_worker.sh .
@@ -138,7 +138,7 @@ Vagrant.configure(2) do |config|
         ./install_ee.sh
         ./join_worker.sh
         ./install_dtr.sh
-        ./prepopulate_dtr.sh
+        ./prepopulate.sh
         ./backup_dtr.sh
       SHELL
     end
