@@ -1,17 +1,13 @@
-# HRM Deployment
-docker service create \
-  --network ucp-hrm \
-  --name=viz \
-  --publish=8080 \
-  --constraint=node.role==manager \
-  --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-  --label com.docker.ucp.mesh.http.8080=external_route=http://visualizer.local,internal_port=8080 \
-  dockersamples/visualizer
+#!/bin/bash
 
-# Non-HRM Deployment
-docker service create \
-  --name=viz \
-  --publish=8080:8080/tcp \
+docker network create -d overlay visualizer
+
+docker service create -d \
+  --replicas 1 \
   --constraint=node.role==manager \
   --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+  --label com.docker.lb.hosts=visualizer.local \
+  --label com.docker.lb.port=8080 \
+  --network visualizer \
+  --name visualizer \
   dockersamples/visualizer

@@ -7,7 +7,7 @@ export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 
 # Download UCP client bundle
 echo "Retrieving authtoken"
-export AUTHTOKEN=$(curl -sk -d '{"username":"admin","password":"'"${UCP_PASSWORD}"'"}' https://${UCP_IPADDR}/auth/login | jq -r .auth_token)
+export AUTHTOKEN=$(curl -sk -N -d '{"username":"admin","password":"'"${UCP_PASSWORD}"'"}' https://${UCP_IPADDR}/auth/login | jq -r .auth_token)
 sudo mkdir ucp-bundle-admin
 echo "Downloading ucp bundle"
 sudo -E sh -c "curl -k -H 'Authorization: Bearer ${AUTHTOKEN}' https://${UCP_IPADDR}/api/clientbundle -H 'accept: application/json, text/plain, */*' --insecure > /home/ubuntu/ucp-bundle-admin/bundle.zip"
