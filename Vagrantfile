@@ -126,13 +126,13 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/install_ee.sh .
         sudo cp /vagrant/scripts/join_worker.sh .
         sudo cp /vagrant/scripts/install_dtr.sh .
-        sudo cp /vagrant/scripts/prepopulate_dtr.sh .
+        sudo cp /vagrant/scripts/prepopulate.sh .
         sudo cp /vagrant/scripts/backup_dtr.sh .
         sudo cp /vagrant/scripts/restore_dtr.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x join_worker.sh
         sudo chmod +x install_dtr.sh
-        sudo chmod +x prepopulate_dtr.sh
+        sudo chmod +x prepopulate.sh
         sudo chmod +x backup_dtr.sh
         sudo chmod +x restore_dtr.sh
         ./install_ee.sh
