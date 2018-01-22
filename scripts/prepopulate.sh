@@ -1,35 +1,39 @@
 #!/bin/bash
 
-DTR_URL=dtr.local
-DTR_PASSWORD=$(cat /vagrant/env/ucp_password)
+export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
+export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
+export UCP_FQDN=ucp.local
+export DTR_FQDN=dtr.local
+export DTR_PASSWORD=$(cat /vagrant/env/ucp_password)
+export AUTH_TOKEN="$(curl -sk -d "{\"username\":\"$UCP_USERNAME\",\"password\":\"$UCP_PASSWORD\"}" "https://${UCP_FQDN}/auth/login" | jq -r .auth_token 2>/dev/null)"
 
 # create users
 createUser() {
 	USER_NAME=$1
   FULL_NAME=$2
-  curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user docker:dockeradmin -d "{
-      \"isOrg\": false,
+	curl -X POST "https://${UCP_FQDN}/accounts/" -H  "accept: application/json" \
+		-H "Authorization: Bearer ${AUTH_TOKEN}" \
+		-H "content-type: application/json" -d "{
+			\"isOrg\": false,
       \"isAdmin\": false,
       \"isActive\": true,
       \"fullName\": \"${FULL_NAME}\",
       \"name\": \"${USER_NAME}\",
-      \"password\": \"docker123\"}" \
-      "https://${DTR_URL}/enzi/v0/accounts"
+      \"password\": \"docker123\"}"
 }
 createUser david 'David Yu'
 createUser solomon 'Solomon Hykes'
 createUser banjot 'Banjot Chanana'
 createUser vivek 'Vivek Saraswat'
 createUser chad 'Chad Metcalf'
+
 # create organizations
 createOrg() {
 	ORG_NAME=$1
-	curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" \
-    --user docker:dockeradmin -d "{
-      \"isOrg\": true,
-      \"name\": \"${ORG_NAME}\"}" \
-      "https://${DTR_URL}/enzi/v0/accounts"
+	curl -X POST "https://${UCP_FQDN}/accounts/" -H "accept: application/json" \
+		-H "Authorization: Bearer ${AUTH_TOKEN}" -H "content-type: application/json" -d "{
+				\"isOrg\": true,
+				\"name\": \"${ORG_NAME}\"}"
 }
 createOrg engineering
 createOrg infrastructure
