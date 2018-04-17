@@ -88,7 +88,8 @@ start:
 destroy:
 	@vagrant destroy -f ucp worker-node1 worker-node2
 ```
-Then you can run from the CLI. First lets set up a manager node to start our cluster, we'll use the `ucp` target instead to customize our cluster, instead of using `start` to bring up UCP with two swarm worker nodes.
+
+First lets set up a manager node to start our cluster, we'll use the `ucp` target instead to customize our cluster. If you want to just provision UCP and two swarm workers instead of use the `make start` target instead.
 ```
 make ucp
 ```
@@ -98,10 +99,6 @@ If you want to bring up kubernetes worker nodes run these commands to first set 
 make orch
 # Provision and join workers
 make workers
-```
-If you want to bring up UCP with swarm workers go ahead and just run this command
-```
-make start
 ```
 After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR. Before running this command, ensure that orchestration mode is set to Swarm. The following commmnd will provision a swarm worker node and install DTR.
 ```

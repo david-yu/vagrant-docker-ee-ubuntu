@@ -18,8 +18,3 @@ sudo -E sh -c 'docker run --rm --log-driver none docker/dtr:${DTR_VERSION} backu
 
 # Sleep 30 seconds to wait for DTR to come back up
 sleep 30
-
-# Trust self-signed DTR CA
-sudo sh -c 'curl -k https://dtr.local/ca -o /usr/local/share/ca-certificates/dtr.local.crt'
-sudo update-ca-certificates
-sudo systemctl restart docker
