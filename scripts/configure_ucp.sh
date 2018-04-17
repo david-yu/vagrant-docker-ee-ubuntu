@@ -8,7 +8,7 @@ CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.T
 # Collect the current config with `docker config inspect`
 docker config inspect --format '{{ printf "%s" .Spec.Data }}' $CURRENT_CONFIG_NAME > ucp-config.toml
 
-if [ -f /vagrant/env/k8s ]; then
+if [ -e /vagrant/env/k8s ]; then
   echo 'changing orchestration to swarm'
   # Switch back to swarm
   sed -i '/default_node_orchestrator =/ s/= .*/= "swarm"/' ucp-config.toml
@@ -18,6 +18,7 @@ else
   echo 'changing orchestration to k8s'
   # Change default node orchestrator to k8s
   sed -i '/default_node_orchestrator =/ s/= .*/= "kubernetes"/' ucp-config.toml
+  echo 'true' > /vagrant/env/k8s
 fi
 
 # NEXT_CONFIG_NAME will be the name of the new UCP configuration

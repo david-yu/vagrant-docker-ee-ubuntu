@@ -13,9 +13,7 @@ ucp:
 	@vagrant up ucp
 
 orch:
-	@vagrant up ucp
 	@vagrant ssh ucp -c './configure_ucp.sh'
-	echo 'true' > env/k8s
 
 workers:
 	@vagrant up worker-node1 worker-node2
