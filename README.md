@@ -93,14 +93,14 @@ First lets set up a manager node to start our cluster, we'll use the `ucp` targe
 ```
 make ucp
 ```
-If you want to bring up kubernetes worker nodes run these commands to first set orchestration mode and then bring the kubernetes workers.
+Next, lets bring up kubernetes worker nodes by running the following commands to first set the orchestration mode to Kubernes and then provisioning and joining the kubernetes workers to the cluster.
 ```
 # Switch orchestration to Kubernetes
 make orch
 # Provision and join workers
 make workers
 ```
-After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR. Before running this command, ensure that orchestration mode is set to Swarm. The following commmnd will provision a swarm worker node and install DTR.
+After setting up a swarm or kubernetes cluster with the previous commands, we'll go ahead and set up DTR. Before installing DTR, ensure that orchestration mode is set to Swarm. The following commands will first switch orchestration mode (back to Kubernetes from Swarm) and then provision a swarm worker node and install DTR.
 ```
 # Switch orchestration mode to Swarm
 make orch
