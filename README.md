@@ -40,10 +40,10 @@ This template will also setup the VMs with static ip addresses as follows (if IP
 DNS entries for landrush:
 - `dtr.local`: 172.28.128.34
 - `ucp.local`: 172.28.128.31
-- `wordpress.local`: 172.28.128.31
-- `jenkins.local`: 172.28.128.31
-- `nodeapp.local`: 172.28.128.31
-- `visualizer.local`: 172.28.128.31
+- `wordpress.local`: 172.28.128.35
+- `jenkins.local`: 172.28.128.35
+- `nodeapp.local`: 172.28.128.35
+- `visualizer.local`: 172.28.128.35
 - `gitlab.local`: 172.28.128.31
 
 ## Getting Started
