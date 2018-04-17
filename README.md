@@ -11,6 +11,7 @@ This vagrant file is provided strictly for demonstration purposes to help setup 
 - `files` - configuration files for load balancers, etc
 - `scripts` - scripts executed by VagrantFile
 - `Makefile` - file used to create simple commands via `make` which invoke the Vagrant CLI
+- `Vagrantfile` - file used to provisioning of infrastructure as invoked by Vagrant CLI
 
 ### Vagrant VMs provisioned
 
