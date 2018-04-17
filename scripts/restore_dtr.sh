@@ -5,7 +5,7 @@ export DTR_IPADDR=$(cat /vagrant/env/dtr-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/env/dtr-replica-id)
 export DTR_FQDN=dtr.local
-export DTR_VERSION=2.5.0-beta3
+export DTR_VERSION=2.5.0
 
 docker run --rm -it docker/dtr:${DTR_VERSION} destroy \
   --replica-id ${DTR_REPLICA_ID} --ucp-url ${UCP_IPADDR} --ucp-username docker \
