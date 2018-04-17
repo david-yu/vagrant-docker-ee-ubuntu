@@ -1,8 +1,6 @@
 export UCP_VERSION=3.0.0
 export UCP_ID=$(cat /vagrant/env/ucp-id)
 
-sleep 30
-
 # Collect Config file name
 CURRENT_CONFIG_NAME=$(docker service inspect ucp-agent --format '{{range .Spec.TaskTemplate.ContainerSpec.Configs}}{{if eq "/etc/ucp/ucp.toml" .File.Name}}{{.ConfigName}}{{end}}{{end}}')
 # Collect the current config with `docker config inspect`
