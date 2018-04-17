@@ -89,7 +89,7 @@ destroy:
 	@vagrant destroy -f ucp worker-node1 worker-node2
 ```
 
-First lets set up a manager node to start our cluster, we'll use the `ucp` target instead to customize our cluster. If you want to just provision UCP and two swarm workers instead of use the `make start` target instead.
+First lets set up a manager node to start our cluster, we'll use the `ucp` target instead to build a cluster with both swarm and kubernetes workers. If you want to just provision UCP and two swarm workers, use the `make start` target instead.
 ```
 make ucp
 ```
