@@ -1,8 +1,8 @@
 #!/bin/bash
 
-vagrant snap rollback ucp
-vagrant snap rollback dtr
-vagrant snap rollback worker-node1
-vagrant snap rollback worker-node2
-vagrant snap rollback jenkins
-vagrant snap rollback gitlab
+vagrant snapshot restore ucp
+vagrant snapshot restore dtr
+vagrant snapshot restore worker-node1
+vagrant snapshot restore worker-node2
+vagrant snapshot restore jenkins
+vagrant snapshot restore gitlab

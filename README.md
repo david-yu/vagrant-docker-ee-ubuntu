@@ -76,7 +76,6 @@ docker_subscription.lic
 ```
 vagrant plugin install landrush
 vagrant plugin install vagrant-hostsupdater
-vagrant plugin install vagrant-multiprovider-snap
 ```
 
 6. #### Bring up nodes

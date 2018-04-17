@@ -11,7 +11,7 @@ sudo curl -fsSL ${DOCKER_EE_URL}/ubuntu/gpg | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] ${DOCKER_EE_URL}/ubuntu $(lsb_release -cs) test-2.0"
 sudo apt-get update
 sudo apt-get -y install docker-ee
-sudo usermod -aG docker ubuntu
+sudo usermod -aG docker vagrant
 
 # Configure DNS and Graph Driver for Docker
 sudo sh -c "echo '{

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-vagrant snap take ucp
-vagrant snap take dtr
-vagrant snap take worker-node1
-vagrant snap take worker-node2
-vagrant snap take jenkins
-vagrant snap take gitlab
+vagrant snapshot push ucp
+vagrant snapshot push dtr
+vagrant snapshot push worker-node1
+vagrant snapshot push worker-node2
+vagrant snapshot push jenkins
+vagrant snapshot push gitlab

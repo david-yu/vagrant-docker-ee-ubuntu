@@ -12,17 +12,10 @@ start:
 ucp:
 	@vagrant up ucp
 
-k8s:
+orch:
 	@vagrant up ucp
-	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
+	@vagrant ssh ucp -c './configure_ucp.sh'
 	echo 'true' > env/k8s
-	@vagrant up worker-node1 worker-node2
-
-mixed:
-	@vagrant up ucp worker-node1
-	echo 'true' > env/k8s
-	@vagrant ssh ucp -c 'sudo ./configure_ucp.sh'
-	@vagrant up worker-node2
 
 workers:
 	@vagrant up worker-node1 worker-node2

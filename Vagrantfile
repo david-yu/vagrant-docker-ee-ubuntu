@@ -24,7 +24,7 @@ Vagrant.configure(2) do |config|
       ubuntu_ucp_node1.landrush.host 'wordpress.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'jenkins.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'nodeapp.local', '172.28.128.35'
-      ubuntu_ucp_node1.landrush.host 'visualizer.local', '172.28.128.31'
+      ubuntu_ucp_node1.landrush.host 'visualizer.local', '172.28.128.35'
       config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", "2560"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]

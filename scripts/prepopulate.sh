@@ -48,7 +48,10 @@ createRepo() {
       \"name\": \"${REPO_NAME}\",
       \"shortDescription\": \"\",
       \"longDescription\": \"\",
-      \"visibility\": \"public\"}" \
+			\"immutableTags\": false,
+			\"scanOnPush\": false,
+			\"enableManifestLists\": true,
+			\"visibility\": \"public\"}" \
       "https://${DTR_FQDN}/api/v0/repositories/${ORG_NAME}"
 }
 createRepo mongo engineering
@@ -61,7 +64,7 @@ docker pull wordpress
 docker pull mariadb
 # build custom images
 git clone https://github.com/yongshin/leroy-jenkins.git
-docker build -t leroy-jenkins /home/ubuntu/leroy-jenkins/
+docker build -t leroy-jenkins /home/vagrant/leroy-jenkins/
 # tag images
 docker tag mongo ${DTR_FQDN}/engineering/mongo:latest
 docker tag wordpress ${DTR_FQDN}/engineering/wordpress:latest
