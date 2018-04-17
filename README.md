@@ -103,6 +103,9 @@ make workers
 ```
 After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR. Before running this command, ensure that orchestration mode is set to Swarm. The following commmnd will provision a swarm worker node and install DTR.
 ```
+# Switch orchestration mode to Swarm
+make orch
+# Provision node and install DTR
 make dtr
 ```
 7. ####  Install Gitlab CE and Jenkins (Optional)
