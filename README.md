@@ -87,19 +87,20 @@ start:
 destroy:
 	@vagrant destroy -f ucp worker-node1 worker-node2
 ```
-Then you can run from the CLI. Make default make start will bring up a ucp manager manager and 2 swarm worker nodes.
+Then you can run from the CLI. First lets set up a manager node to start our cluster
 ```
-make start
+make ucp
 ```
-If you want to bring up a ucp manager node with two kubernetes worker nodes you can run the following command:
+If you want to bring up kubernetes worker nodes run these commands to first set orchestration mode and then bring the kubernetes workers.
 ```
-make k8s
+make orch
+make workers
 ```
-If you want to bring up a ucp manager node with one kubernetes worker node and one swarm worker node you can run the following command:
+If you want to bring up swarm workers go ahead and just ran this command
 ```
-make mixed
+make workers
 ```
-After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR and provision a node and install DTR.
+After setting up a swarm or kubernetes cluster with the previous commands, you can also set up DTR. Before running this command, ensure that orchestration mode is set to Swarm. The following commmnd will provision a swarm worker node and install DTR.
 ```
 make dtr
 ```
