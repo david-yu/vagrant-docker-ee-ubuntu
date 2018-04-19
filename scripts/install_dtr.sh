@@ -8,8 +8,8 @@ export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/env/dtr-replica-id)
 export DTR_VERSION=2.5.0
 
-# Sleep 70 seconds to wait for node registration
-sleep 70
+# Sleep 80 seconds to wait for node registration and for swarm node to come up healthy
+sleep 80
 
 # Install DTR
 sudo -E sh -c 'docker run --rm docker/dtr:${DTR_VERSION} install --ucp-url https://"${UCP_IPADDR}" --ucp-node dtr --replica-id "${DTR_REPLICA_ID}" --dtr-external-url https://dtr.local --ucp-username "${UCP_USERNAME}" --ucp-password "${UCP_PASSWORD}" --ucp-insecure-tls'
