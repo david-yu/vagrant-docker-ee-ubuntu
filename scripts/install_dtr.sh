@@ -6,7 +6,7 @@ export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
 export UCP_USERNAME=$(cat /vagrant/env/ucp_username)
 export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export DTR_REPLICA_ID=$(cat /vagrant/env/dtr-replica-id)
-export DTR_VERSION=2.5.0
+export DTR_VERSION=2.5.3
 
 # Sleep 90 seconds to wait for node registration and for swarm node to come up healthy
 sleep 90
