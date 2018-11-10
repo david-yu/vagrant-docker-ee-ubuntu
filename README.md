@@ -49,11 +49,11 @@ DNS entries for landrush:
 ## Getting Started
 
 1. #### Download vagrant from Vagrant website
- 	- [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+ - [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 
 2. #### Install Virtual Box
- 	- [https://www.virtualbox.org/wiki/Downloads/](https://www.virtualbox.org/wiki/Downloads/)
+ - [https://www.virtualbox.org/wiki/Downloads/](https://www.virtualbox.org/wiki/Downloads/)
 
 3. #### Create files in the `/env` folder to store environment variables with custom values for use by Vagrant
 ```
@@ -90,7 +90,7 @@ First lets set up a manager node to start our cluster, we'll use the `ucp` targe
 ```
 make ucp
 ```
-Next, lets bring up kubernetes worker nodes by running the following commands to first set the orchestration mode to Kubernes and then provisioning and joining the kubernetes workers to the cluster.
+You should now be able access UCP on `https://ucp.local' and login with `docker/dockeradmin`. Next, lets bring up kubernetes worker nodes by running the following commands to first set the orchestration mode to Kubernes and then provisioning and joining the kubernetes workers to the cluster.
 ```
 # Switch orchestration to Kubernetes
 make orch
