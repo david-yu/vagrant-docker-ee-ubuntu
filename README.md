@@ -67,13 +67,13 @@ https://storebits.docker.com/ee/linux/sub-xxx-xxx-xxx-xxx-xxx
 
 4. #### Provide Docker EE license in `/files` folder (will fail if not provided)
 ```
-docker_subscription.lic
+	docker_subscription.lic
 ```
 
 5. #### Install [vagrant-landrush](https://github.com/vagrant-landrush/landrush) plugin
 ```
-vagrant plugin install landrush
-vagrant plugin install vagrant-hostsupdater
+	vagrant plugin install landrush
+	vagrant plugin install vagrant-hostsupdater
 ```
 
 6. #### Bring up nodes
