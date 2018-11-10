@@ -49,9 +49,8 @@ DNS entries for landrush:
 ## Getting Started
 
 1. #### Download vagrant from Vagrant website
-```
-https://www.vagrantup.com/downloads.html
-```
+- [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+
 
 2. #### Install Virtual Box
 ```
