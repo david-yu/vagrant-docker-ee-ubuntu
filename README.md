@@ -1,4 +1,4 @@
-Vagrant Virtualbox setup for Docker EE 2.0 on Ubuntu Xenial 16.04
+Vagrant Virtualbox setup for Docker EE 2.1 on Ubuntu Xenial 16.04
 ========================
 
 ## Overview

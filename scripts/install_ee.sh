@@ -8,7 +8,7 @@ sudo resolvconf -u
 # Install Docker EE engine
 export DOCKER_EE_URL=$(cat /vagrant/env/ee_url)
 sudo curl -fsSL ${DOCKER_EE_URL}/ubuntu/gpg | sudo apt-key add
-sudo add-apt-repository "deb [arch=amd64] ${DOCKER_EE_URL}/ubuntu $(lsb_release -cs) stable-17.06"
+sudo add-apt-repository "deb [arch=amd64] ${DOCKER_EE_URL}/ubuntu $(lsb_release -cs) stable-18.09"
 sudo apt-get update
 sudo apt-get -y install docker-ee
 sudo usermod -aG docker vagrant
