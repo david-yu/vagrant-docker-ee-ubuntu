@@ -90,7 +90,7 @@ First lets set up a manager node to start our cluster, we'll use the `ucp` targe
 ```
 make ucp
 ```
-You should now be able access UCP on `https://ucp.local' and login with `docker/dockeradmin`. Next, lets bring up kubernetes worker nodes by running the following commands to first set the orchestration mode to Kubernes and then provisioning and joining the kubernetes workers to the cluster.
+You should now be able access UCP on `https://ucp.local` and login with `docker/dockeradmin`. Next, lets bring up kubernetes worker nodes by running the following commands to first set the orchestration mode to Kubernes and then provisioning and joining the kubernetes workers to the cluster.
 ```
 # Switch orchestration to Kubernetes
 make orch
