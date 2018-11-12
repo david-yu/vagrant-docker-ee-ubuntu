@@ -64,9 +64,6 @@ createRepo leroy-jenkins infrastructure
 docker pull mongo
 docker pull wordpress
 docker pull mariadb
-# build custom images
-git clone https://github.com/david-yu/leroy-jenkins.git
-docker build -t leroy-jenkins /home/vagrant/leroy-jenkins/
 # tag images
 docker tag mongo ${DTR_FQDN}/engineering/mongo:latest
 docker tag wordpress ${DTR_FQDN}/engineering/wordpress:latest
