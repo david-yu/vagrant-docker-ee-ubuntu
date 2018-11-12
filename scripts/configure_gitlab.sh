@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Create users
 curl --insecure --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
   --header "Content-Type:application/json" https://gitlab.local/api/v3/users \

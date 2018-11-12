@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 vagrant snapshot restore ucp
 vagrant snapshot restore dtr
 vagrant snapshot restore worker-node1

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export UCP_ID=$(cat /vagrant/env/ucp-id)
 export UCP_VERSION=3.1.0
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 docker network create -d overlay visualizer
 
 docker service create -d \
