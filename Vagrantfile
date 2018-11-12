@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
       ubuntu_ucp_node1.landrush.host 'nodeapp.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'visualizer.local', '172.28.128.35'
       config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "4096"]
+        vb.customize ["modifyvm", :id, "--memory", "4352"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
         vb.name = "ubuntu-ucp-node1"
       end
