@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
 export DTR_IPADDR=$(cat /vagrant/env/dtr-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)

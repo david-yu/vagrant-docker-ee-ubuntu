@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Add additional DNS servers to help resolve storebits.docker.com domain
 sudo sh -c "echo 'nameserver 8.8.8.8
 nameserver 8.8.4.4' >> /etc/resolvconf/resolv.conf.d/base"

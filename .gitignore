@@ -9,3 +9,4 @@ Jenkinsfile*
 id_rsa
 id_rsa.pub
 env.sh
+/haproxy-node 

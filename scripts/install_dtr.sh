@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 < /dev/urandom tr -dc a-f0-9 | head -c${1:-12} > /vagrant/env/dtr-replica-id
 ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/env/dtr-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)

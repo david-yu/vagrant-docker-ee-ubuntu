@@ -26,11 +26,12 @@ Vagrant.configure(2) do |config|
       ubuntu_ucp_node1.landrush.host 'nodeapp.local', '172.28.128.35'
       ubuntu_ucp_node1.landrush.host 'visualizer.local', '172.28.128.35'
       config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "2560"]
+        vb.customize ["modifyvm", :id, "--memory", "4096"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
         vb.name = "ubuntu-ucp-node1"
       end
       ubuntu_ucp_node1.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate jq
         sudo ntpdate -s time.nist.gov
@@ -53,7 +54,7 @@ Vagrant.configure(2) do |config|
         ./create_tokens.sh
         ./backup_ucp.sh
         # ./visualizer.sh
-     SHELL
+      SHELL
     end
 
     # Docker EE manager node for ubuntu 16.04 (optional)
@@ -69,6 +70,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node2"
       end
       ubuntu_ucp_node2.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
@@ -78,7 +80,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x join_manager.sh
         ./install_ee.sh
         ./join_manager.sh
-      SHELL
+       SHELL
     end
 
     # Docker EE manager node for ubuntu 16.04 (optional)
@@ -94,6 +96,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node3"
       end
       ubuntu_ucp_node3.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
@@ -103,7 +106,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x join_manager.sh
         ./install_ee.sh
         ./join_manager.sh
-     SHELL
+      SHELL
     end
 
     # Docker EE DTR node for ubuntu 16.04
@@ -120,6 +123,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-dtr-node1"
       end
       ubuntu_dtr_node1.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate jq
         sudo ntpdate -s time.nist.gov
@@ -140,7 +144,7 @@ Vagrant.configure(2) do |config|
         ./install_dtr.sh
         ./prepopulate.sh
         ./backup_dtr.sh
-      SHELL
+       SHELL
     end
 
     # Docker EE node for ubuntu 16.04
@@ -156,6 +160,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-worker-node1"
       end
       ubuntu_worker_node1.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
@@ -165,7 +170,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x join_worker.sh
         ./install_ee.sh
         ./join_worker.sh
-     SHELL
+      SHELL
     end
 
     # Docker EE node for ubuntu 16.04
@@ -181,6 +186,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-worker-node2"
       end
       ubuntu_worker_node2.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
@@ -191,7 +197,7 @@ Vagrant.configure(2) do |config|
         sleep 5
         ./install_ee.sh
         ./join_worker.sh
-     SHELL
+      SHELL
     end
 
     # Gitlab node for ubuntu 16.04 (https://docs.gitlab.com/omnibus/docker/)
@@ -207,6 +213,7 @@ Vagrant.configure(2) do |config|
         vb.name = "gitlab-node"
       end
       gitlab_node.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov
@@ -216,7 +223,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x configure_gitlab.sh
         sleep 5
         ./gitlab.sh
-     SHELL
+       SHELL
     end
 
     # Jenkins node for ubuntu 16.04
@@ -232,6 +239,7 @@ Vagrant.configure(2) do |config|
         vb.name = "jenkins-node"
       end
       jenkins_node.vm.provision "shell", inline: <<-SHELL
+        set -e
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate jq unzip
         sudo ntpdate -s time.nist.gov
@@ -245,7 +253,7 @@ Vagrant.configure(2) do |config|
         ./join_worker.sh
         sleep 15
         ./deploy_jenkins.sh
-     SHELL
+       SHELL
     end
 
     # HAProxy for ubuntu 16.04 (only utilized for HA)
@@ -269,19 +277,20 @@ Vagrant.configure(2) do |config|
       haproxy_node.landrush.host 'visualizer.local', '172.28.128.35'
       haproxy_node.landrush.host 'gitlab.local', '172.28.128.31'
       haproxy_node.vm.provision "shell", inline: <<-SHELL
-       sudo apt-get update
-       sudo apt-get install -y apt-transport-https ca-certificates ntpdate
-       sudo ntpdate -s time.nist.gov
-       sudo apt-get install -y software-properties-common
-       sudo add-apt-repository ppa:vbernat/haproxy-1.7
-       sudo apt-get update
-       sudo apt-get install -y haproxy
-       ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/haproxy-node
-       sudo sed -i '/module(load="imudp")/s/^#//g' /etc/rsyslog.conf
-       sudo sed -i '/input(type="imudp" port="514")/s/^#//g' /etc/rsyslog.conf
-       sudo service rsyslog restart
-       sudo cp /vagrant/files/haproxy.cfg /etc/haproxy/haproxy.cfg
-       sudo service haproxy restart
-      SHELL
+        set -e
+        sudo apt-get update
+        sudo apt-get install -y apt-transport-https ca-certificates ntpdate
+        sudo ntpdate -s time.nist.gov
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository ppa:vbernat/haproxy-1.7
+        sudo apt-get update
+        sudo apt-get install -y haproxy
+        ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/haproxy-node
+        sudo sed -i '/module(load="imudp")/s/^#//g' /etc/rsyslog.conf
+        sudo sed -i '/input(type="imudp" port="514")/s/^#//g' /etc/rsyslog.conf
+        sudo service rsyslog restart
+        sudo cp /vagrant/files/haproxy.cfg /etc/haproxy/haproxy.cfg
+        sudo service haproxy restart
+       SHELL
     end
 end

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 vagrant snapshot push ucp
 vagrant snapshot push dtr
 vagrant snapshot push worker-node1

@@ -1,3 +1,5 @@
+set -e
+
 export UCP_VERSION=3.1.0
 export UCP_ID=$(cat /vagrant/env/ucp-id)
 
