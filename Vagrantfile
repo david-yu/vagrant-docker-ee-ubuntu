@@ -42,6 +42,7 @@ Vagrant.configure(2) do |config|
         sudo cp /vagrant/scripts/visualizer.sh .
         sudo cp /vagrant/scripts/backup_ucp.sh .
         sudo cp /vagrant/scripts/restore_ucp.sh .
+        sudo cp /vagrant/scripts/get_client_bundle.sh .
         sudo chmod +x install_ee.sh
         sudo chmod +x install_ucp.sh
         sudo chmod +x configure_ucp.sh
@@ -49,6 +50,7 @@ Vagrant.configure(2) do |config|
         sudo chmod +x visualizer.sh
         sudo chmod +x backup_ucp.sh
         sudo chmod +x restore_ucp.sh
+        sudo chmod +x get_client_bundle.sh
         ./install_ee.sh
         ./install_ucp.sh
         ./create_tokens.sh
