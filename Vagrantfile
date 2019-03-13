@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
         vb.name = "ubuntu-ucp-node2"
       end
       ubuntu_ucp_node2.vm.provision "shell", inline: <<-SHELL
-        set -e
+        set -e  
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates ntpdate
         sudo ntpdate -s time.nist.gov

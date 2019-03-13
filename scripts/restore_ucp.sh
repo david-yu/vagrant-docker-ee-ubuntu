@@ -5,7 +5,7 @@ set -e
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
 export UCP_PASSWORD=$(cat /vagrant/env/ucp_password)
 export UCP_ID=$(cat /vagrant/env/ucp-id)
-export UCP_VERSION=3.1.0
+export UCP_VERSION=3.1.4
 
 docker container run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \

@@ -2,7 +2,7 @@
 
 set -e
 
-export UCP_VERSION=3.1.0
+export UCP_VERSION=3.1.4
 
 ifconfig enp0s8 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /vagrant/env/ucp-node1-ipaddr
 export UCP_IPADDR=$(cat /vagrant/env/ucp-node1-ipaddr)
