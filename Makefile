@@ -15,6 +15,9 @@ ucp:
 worker1:
 	@vagrant up worker-node1
 
+worker2:
+	@vagrant up worker-node2
+
 orch:
 	@vagrant ssh ucp -c './configure_ucp.sh'
 
